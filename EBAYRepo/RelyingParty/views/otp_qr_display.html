@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>QR Code Display</title>
+<script src="scripts/qrcode.js" type="text/javascript"></script>
+<script src="scripts/qrcode.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> 
+<script type="text/javascript">
+	window.onload = function() {
+		// Check browser support
+		if (typeof (Storage) !== "undefined") {
+			// Retrieve
+			var otp = localStorage.getItem("otp");
+			document.getElementById("otpresult").innerHTML = "OTP Generated: " +otp;
+			new QRCode(document.getElementById("qr_resultarea"), otp);
+			
+			//Wait for 10 secs and then keep checking for registration response.
+			var delay=10000; //10 second
+			
+			//Listening for registration response from JAVA FIDO Server
+			setTimeout(function() {
+			function callNode() {
+				var obj = {};
+				obj.phone = localStorage.getItem("phone");
+			    $.ajax({
+			        cache : false,
+			        type : "POST",
+			        headers : {
+						'content-type' : 'application/json',
+						'accept' : 'application/json'
+					},
+					async : false,
+					// setup the server address
+			        url : 'https://localhost:3000/listenForRegResponse',
+			        data : JSON.stringify(obj),
+			        success : function(result) {
+			            if(result){
+			            	if(result == "SUCCESS"){
+			            		alert("Registration Response is Success");
+			            		//Mark isRegistered = true and store in RP storage.
+			            		if (typeof(Storage) !== "undefined") {
+			            			localStorage.setItem("isRegistered", "true");
+			            		}
+			            		window.location.href = 'reg_complete';
+			            	}
+			            	else {
+			            		alert("No Response Yet");
+			            	}	
+			            }
+			            // make new call
+			            setTimeout(function() {
+			            	callNode();
+			            }, 10000);
+			        },
+			        error: function(result){
+			        	alert("Failure");
+			        }
+			    });
+			};
+			callNode();	
+		}, delay);
+		} else {
+			document.getElementById("otpresult").innerHTML = "Sorry, your browser does not support Web Storage...";
+		}
+	}
+</script>
+
+</head>
+<body>
+	<h1><center>Please Scan below QR code to confirm REGISTRATION with PSL FIDO.</center></h1>
+
+	<br>
+	<br>
+	<div id="otpresult"></div>
+	<br>
+	<br>
+	
+	<center><div id="qr_resultarea"></div></center>
+</body>
+</html>

@@ -1,0 +1,386 @@
+/**
+ * Module dependencies.
+ */
+var fs = require('fs');
+var https = require('https');
+var express = require('express'), routes = require('./routes'), http = require('http'), path = require('path'), bodyParser = require('body-parser');
+var https = require('https');
+var url = require('url');
+var qr = require('qr-image');
+var sleep = require('sleep');
+
+var app = express();
+
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended : false
+}));
+app.use(express.static(path.join(__dirname, 'public')));
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Avoids
+// DEPTH_ZERO_SELF_SIGNED_CERT
+// error for self-signed certs
+
+app.get('/', routes.index);
+
+// check if user present in Relying Party DB else add in DB.
+app.post('/login', function(req, resp) {
+	var phone = req.body.phone;
+	resp.send("Success");
+});
+
+// Route to call Remote FIDO API: RP Reg Request.
+app.post('/registerRPWithFIDO', function(req, resp) {
+	var uname = req.body.uname;
+	var vname = req.body.vname;
+	var phone = req.body.phone;
+	var email = req.body.email;
+	var accntid = req.body.accountid;
+	console.log("\nDisplay Name: " + uname);
+	console.log("RP Display Name: " + vname);
+	console.log("Phone Number: " +phone);
+	console.log("Email Address: "+email);
+	console.log("Account ID: " +accntid);
+
+	var dataObj;
+
+	/**
+	 * Calling Remote API on Java server
+	 */
+	jsonObject = JSON.stringify({
+		"rpDisplayName" : vname,
+		"displayName" : uname,
+		"email" : email,
+		"accountId" : accntid,
+		"phoneNumber" : phone
+	});
+
+	// prepare the header
+	var postheaders = {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json'
+	};
+
+	// the post options
+	var optionspost = {
+		host : 'localhost',
+		port : 8443,
+		path : '/fidouaf_test/v1/public/rpRegRequest',
+		method : 'POST',
+		headers : postheaders
+	};
+
+	console.info('Options prepared:');
+	console.info(optionspost);
+	console.info('Do the POST call');
+
+	// do the POST call
+	var reqPost = https.request(optionspost, function(res) {
+		console.log("statusCode: ", res.statusCode);
+
+		res.on('data', function(data) {
+			console.info('POST result:\n');
+			dataObj = data;
+			process.stdout.write(data);
+			console.info('\n\nPOST completed');
+		});
+
+		res.on('end', function() {
+			var jsonObj = JSON.parse(dataObj);
+			console.log(jsonObj.registrationResponse);
+			resp.send(jsonObj.registrationResponse);
+		});
+	});
+
+	// write the json data
+	reqPost.write(jsonObject);
+	reqPost.end();
+
+	reqPost.on('error', function(e) {
+		console.error(e);
+	});
+});
+
+//check for registration response (SUCCESS Or FAILURE)
+app.post('/listenForRegResponse', function(req, resp) {
+	
+	var phone = req.body.phone;
+	console.log("\nPhone Number: " + phone);
+	
+	var dataObj;
+
+	/**
+	 * Calling Remote API on Java server
+	 */
+	jsonObject = JSON.stringify({
+		"username" : phone
+	});
+	// prepare the header
+	var postheaders = {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json'
+	};
+
+	// the post options
+	var optionspost = {
+		host : 'localhost',
+		port : 8443,
+		path : '/fidouaf_test/v1/public/regResponseStatus',
+		method : 'POST',
+		headers : postheaders
+	};
+
+	console.info('Options prepared:');
+	console.info(optionspost);
+	console.info('Do the POST call');
+
+	// do the GET call
+	var reqPost = https.request(optionspost, function(res) {
+		console.log("statusCode: ", res.statusCode);
+
+		res.on('data', function(data) {
+			console.info('POST result:\n');
+			dataObj = data;
+			process.stdout.write(data);
+			console.info('\n\nPOST completed');
+		});
+
+		res.on('end', function() {
+			resp.send(dataObj);
+		});
+	});
+
+	// write the json data
+	reqPost.write(jsonObject);
+	reqPost.end();
+
+	reqPost.on('error', function(e) {
+		console.error(e);
+	});
+});
+
+
+//notify mobile device to go ahead with authentication
+app.post('/pushnotifytoauthenticate', function(req, resp) {
+	var phone = req.body.phone;
+	var vname = req.body.vname;
+	console.log("\nPhone Number: " + phone);
+	
+	var dataObj;
+	
+	/**
+	 * Calling Remote API on Java server
+	 */
+	jsonObject = JSON.stringify({
+		"phoneNumber" : phone,
+		"rpDisplayName" : vname
+	});
+	
+	// prepare the header
+	var postheaders = {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json'
+	};
+	
+	// the post options
+	var optionspost = {
+		host : 'localhost',
+		port : 8443,
+		path : '/fidouaf_test/v1/public/pushNotifyAuthentication',
+		method : 'POST',
+		headers : postheaders
+	};
+	
+	console.info('Options prepared:');
+	console.info(optionspost);
+	console.info('Do the POST call');
+	
+	// do the POST call
+	var reqPost = https.request(optionspost, function(res) {
+		console.log("statusCode: ", res.statusCode);
+
+		res.on('data', function(data) {
+			console.info('POST result:\n');
+			dataObj = data;
+			process.stdout.write(data);
+			console.info('\n\nPOST completed');
+		});
+
+		res.on('end', function() {
+			resp.send(dataObj);
+		});
+	});
+	
+	// write the json data
+	reqPost.write(jsonObject);
+	reqPost.end();
+
+	reqPost.on('error', function(e) {
+		console.error(e);
+	});
+});
+
+
+//check for authentication response (SUCCESS Or FAILURE)
+app.post('/listenForAuthResponse', function(req, resp) {
+	var phone = req.body.phone;
+	console.log("\nPhone Number: " + phone);
+	
+	var dataObj;
+
+	/**
+	 * Calling Remote API on Java server
+	 */
+	jsonObject = JSON.stringify({
+		"username" : phone
+	});
+	
+	// prepare the header
+	var postheaders = {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json'
+	};
+
+	// the post options
+	var optionspost = {
+		host : 'localhost',
+		port : 8443,
+		path : '/fidouaf_test/v1/public/authResponseStatus',
+		method : 'POST',
+		headers : postheaders
+	};
+
+	console.info('Options prepared:');
+	console.info(optionspost);
+	console.info('Do the POST call');
+
+	// do the GET call
+	var reqPost = https.request(optionspost, function(res) {
+		console.log("statusCode: ", res.statusCode);
+
+		res.on('data', function(data) {
+			console.info('POST result:\n');
+			dataObj = data;
+			process.stdout.write(data);
+			console.info('\n\nPOST completed');
+		});
+
+		res.on('end', function() {
+			resp.send(dataObj);
+		});
+	});
+	
+	// write the json data
+	reqPost.write(jsonObject);
+	reqPost.end();
+
+	reqPost.on('error', function(e) {
+		console.error(e);
+	});
+});
+
+
+
+// GET Routes
+app.get("/account", function(req, res) {
+	res.render('account', {
+		title : 'Account Details'
+	});
+});
+
+app.get("/registerfido", function(req, res) {
+	res.render('registerfido', {
+		title : 'FIDO Registration'
+	});
+});
+
+app.get("/otp_qr_display", function(req, res) {
+	res.render('otp_qr_display', {
+		title : 'QR Code'
+	});
+});
+
+app.get("/reg_complete", function(req, res) {
+	res.render('reg_complete', {
+		title : 'Registration Sucessful'
+	});
+});
+
+app.get("/registered_account", function(req, res) {
+	res.render('registered_account', {
+		title : 'Registered Account'
+	});
+});
+
+http.createServer(app).listen(app.get('port'), function() {
+	console.log('Express server listening on port ' + app.get('port'));
+});
+
+
+//Route to call Remote FIDO API: Sign-up
+/*app.post('/signup', function(req, resp) {
+	var name = req.body.username;
+	var pwd = req.body.password;
+	console.log("User Phone Number: " + name);
+	console.log("Password: " + pwd);
+
+	var dataObj;*/
+
+	/**
+	 * Calling Remote API on Java server
+	 */
+	/*jsonObject = JSON.stringify({
+		"username" : name,
+		"password" : pwd
+	});
+
+	// prepare the header
+	var postheaders = {
+		'Content-Type' : 'application/json',
+		'Accept' : 'application/json'
+	};
+
+	// the post options
+	var optionspost = {
+		host : 'localhost',
+		port : 8443,
+		path : '/fidouaf_test/v1/public/dosignup',
+		method : 'POST',
+		headers : postheaders
+	};
+
+	console.info('Options prepared:');
+	console.info(optionspost);
+	console.info('Do the POST call');
+
+	// do the POST call
+	var reqPost = https.request(optionspost, function(res) {
+		console.log("statusCode: ", res.statusCode);
+
+		res.on('data', function(data) {
+			console.info('POST result:\n');
+			dataObj = data;
+			process.stdout.write(data);
+			console.info('\n\nPOST completed');
+		});
+
+		res.on('end', function() {
+			var jsonObj = JSON.parse(dataObj);
+			console.log(jsonObj.Message);
+			resp.send(jsonObj.Message);
+		});
+
+	});
+
+	// write the json data
+	reqPost.write(jsonObject);
+	reqPost.end();
+
+	reqPost.on('error', function(e) {
+		console.error(e);
+	});
+});*/

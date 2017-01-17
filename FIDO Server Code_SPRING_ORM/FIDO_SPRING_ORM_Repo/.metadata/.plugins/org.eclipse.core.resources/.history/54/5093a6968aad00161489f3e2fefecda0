@@ -1,0 +1,226 @@
+package org.psl.fidouaf.dao.impl;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.psl.fido.uaf.msg.Device;
+import org.psl.fidouaf.dao.UtilServicesDao;
+import org.psl.fidouaf.entity.PublicKeyDetails;
+import org.psl.fidouaf.entity.Registration;
+import org.psl.fidouaf.entity.TransactionDetails;
+import org.psl.fidouaf.util.ConnectionUtil;
+import org.springframework.stereotype.Repository;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
+@Repository
+public class UtilServicesDaoImpl implements UtilServicesDao {
+
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public String[] getAAIDforDeviceIdAccountId(String deviceId,
+			String rpAccountId) {
+		String[] aaids = null;
+		String aaid = null;
+		List<String> aaidsFound = new ArrayList<String>();
+		//List<String> aaidsFromDB = new ArrayList<String>();
+
+		Session session = ConnectionUtil.OpenSession();
+
+		//Criteria criteriaQuery = session.createCriteria(PublicKeyDetails.class);
+		//criteriaQuery.createAlias("publickeydetails", "pubKeyDetails");
+		//Criterion deviceIdCondition = Restrictions.eq("deviceid", deviceId);
+		//Criterion rpAccountIdCondition = Restrictions.eq("rpaccountid",rpAccountId);
+
+		// To get records matching with AND conditions
+		//LogicalExpression andExp = Restrictions.and(deviceIdCondition,rpAccountIdCondition);
+		//criteriaQuery.add(andExp);
+
+		/*
+		 * FUTURE REFERENCE:
+		 * https://www.tutorialspoint.com/hibernate/hibernate_criteria_queries
+		 * .htm
+		 */
+
+		// To get records matching with OR conditions
+		// LogicalExpression orExp = Restrictions.or(salary, name);
+		// cr.add( orExp );
+
+		//List<PublicKeyDetails> publicKeyDetails = criteriaQuery.list();
+		//for (int j = 0; j < publicKeyDetails.size(); j++) {
+			//aaidsFromDB.add(publicKeyDetails.get(j).getAaid_keyid());
+		//}
+
+		/*
+		 * Example using SQLQuery class. REFERENCE:
+		 * http://stackoverflow.com/questions
+		 * /13126457/hibernate-retrieve-results-from-database-based-on-condition
+		 */
+
+		 String dbQuery = "SELECT aaid_keyid FROM key_info WHERE deviceid='"+deviceId+"' and rpaccountid='"+rpAccountId+"'";
+		 SQLQuery query = session .createSQLQuery(dbQuery);
+		 //query.setString("deviceid", deviceId);
+		 //query.setString("rpaccountid", rpAccountId);
+		 List<String> aaidsFromDB = query.list();
+
+		for (int i = 0; i < aaidsFromDB.size(); i++) {
+			String[] parts = aaidsFromDB.get(i).split("#");
+			String part1 = parts[0];
+			String part2 = parts[1];
+			aaid = part1 + "#" + part2;
+			aaidsFound.add(aaid);
+		}
+
+		// Convert ArrayList to String[]
+		aaids = aaidsFound.toArray(new String[aaidsFound.size()]);
+		return aaids;
+	}
+
+	/**
+	 * Method to update authstats field in registration table to true to mark
+	 * the success of auth response API.
+	 * 
+	 * @param aaid_Keyid
+	 */
+	public boolean updateAuthStatusInDB(String aaid_Keyid) {
+		String rpAccountId = null;
+		boolean isUpdateSuccessful = false;
+		Session session = ConnectionUtil.OpenSession();
+		PublicKeyDetails publicKeyDetails = (PublicKeyDetails) session.get(
+				PublicKeyDetails.class, aaid_Keyid);
+
+		if (publicKeyDetails != null) {
+			rpAccountId = publicKeyDetails.getRpAccountId();
+		} else {
+			System.out
+					.println("No Key Information was found for the Given AAID#KEYID.");
+		}
+
+		if (rpAccountId != null) {
+			Transaction transaction = null;
+			try {
+				transaction = session.beginTransaction();
+				Registration registrationDetails = (Registration) session.get(
+						Registration.class, rpAccountId);
+				registrationDetails.setAuthStatus(true);
+				session.update(registrationDetails);
+				transaction.commit();
+				isUpdateSuccessful = true;
+			} catch (Exception exception) {
+				if (transaction != null) {
+					transaction.rollback();
+					// log the exception
+				}
+			} finally {
+				session.close();
+			}
+		} else {
+			System.out
+					.println("RP Account Id not found due to unavailability of given AAID#KEYID in Database.");
+		}
+		return isUpdateSuccessful;
+	}
+
+	@Override
+	public boolean removeAllRecordsForAccountId(String deviceId) {
+		boolean isDeleted = false;
+		int vendorDeleted = 0, deviceDeleted = 0, transactionDeleted = 0, publicKeysDeleted = 0, registrationDeleted = 0;
+		
+		Session session = ConnectionUtil.OpenSession();
+		Transaction transaction = session.beginTransaction();
+		Registration registrationDetails = (Registration) session.get(Registration.class, deviceId);
+		String rpAccountId = registrationDetails.getDeviceId();
+		
+		//Delete Transaction Data
+		try {
+	        TransactionDetails transactionDetails = (TransactionDetails) session.get(TransactionDetails.class, rpAccountId);
+	        session.delete(transactionDetails);
+	    } catch (Exception e) {
+	        transaction.rollback();
+	        e.printStackTrace();
+	    } 
+		
+		//Delete Public Key data
+		try {
+	        PublicKeyDetails publicKeyDetails = (PublicKeyDetails) session.get(PublicKeyDetails.class, rpAccountId);
+	        session.delete(publicKeyDetails);
+	    } catch (Exception e) {
+	        transaction.rollback();
+	        e.printStackTrace();
+	    } 
+		
+		//Delete Device Data
+		try {
+	        Device deviceDetails = (PublicKeyDetails) session.get(PublicKeyDetails.class, rpAccountId);
+	        session.delete(publicKeyDetails);
+	    } catch (Exception e) {
+	        transaction.rollback();
+	        e.printStackTrace();
+	    } 
+		
+
+		try {
+			String query3 = "delete from transactiondb"; // where accountid in
+															// (select
+															// rpaccountid from
+															// devicedetails
+															// where deviceid =
+															// ?)";
+			PreparedStatement preparedStmt3 = (PreparedStatement) conn
+					.prepareStatement(query3);
+			// preparedStmt3.setString(1, phoneNumber);
+			// preparedStmt3.setString(1, deviceId);
+			transactionDeleted = preparedStmt3.executeUpdate();
+
+			// Delete from device details DB
+			// String query1 =
+			// "delete from devicedetails where phonenumber = ?";
+			String query1 = "delete from devicedetails"; // where deviceid = ?";
+			PreparedStatement preparedStmt1 = (PreparedStatement) conn
+					.prepareStatement(query1);
+			// preparedStmt1.setString(1, phoneNumber);
+			// preparedStmt1.setString(1, deviceId);
+			deviceDeleted = preparedStmt1.executeUpdate();
+
+			// Delete from Vendor DB
+			// String query2 = "delete from vendordb where phonenumber = ?";
+			String query2 = "delete from vendordb"; // where accountid in
+													// (select rpaccountid from
+													// devicedetails where
+													// deviceid = ?)";
+			PreparedStatement preparedStmt2 = (PreparedStatement) conn
+					.prepareStatement(query2);
+			// preparedStmt2.setString(1, phoneNumber);
+			// preparedStmt2.setString(1, deviceId);
+			vendorDeleted = preparedStmt2.executeUpdate();
+
+			// Delete from registration DB
+			/*
+			 * String query1 = "delete from registrationdb where username = ?";
+			 * PreparedStatement preparedStmt1 = (PreparedStatement) conn
+			 * .prepareStatement(query1); preparedStmt1.setString(1, username);
+			 * userDeleted = preparedStmt1.executeUpdate();
+			 */
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		// If both user and relying party details are cleared, mark isDeleted =
+		// true.
+		if ((deviceDeleted > 0 && vendorDeleted == 0 && transactionDeleted == 0)
+				|| (deviceDeleted > 0 && vendorDeleted > 0 && transactionDeleted > 0)
+				|| (deviceDeleted > 0 && vendorDeleted > 0 && transactionDeleted == 0)
+				|| (deviceDeleted > 0 && vendorDeleted == 0 && transactionDeleted > 0)) {
+			isDeleted = true;
+		}
+
+		return isDeleted;
+	}
+}

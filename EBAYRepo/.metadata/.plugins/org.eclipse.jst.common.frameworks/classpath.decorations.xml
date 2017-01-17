@@ -1,0 +1,7 @@
+<classpath>
+  <container id="fidouaf_test!org.eclipse.jst.j2ee.internal.web.container">
+    <entry id="/fidouaf_test/ImportedClasses">
+      <source-attachment-path>/fido-uaf-core</source-attachment-path>
+    </entry>
+  </container>
+</classpath>

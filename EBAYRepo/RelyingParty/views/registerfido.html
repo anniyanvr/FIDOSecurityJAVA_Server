@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Register Relying Party with FIDO</title>
+<link rel="stylesheet" type="text/css" href="stylesheets/style3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> 
+<script type="text/javascript">
+function callRegWithFIDOScript(email){
+	var obj = {};
+	obj.uname = localStorage.getItem("uname");
+	obj.vname = localStorage.getItem("vname");
+	obj.phone = localStorage.getItem("phone");
+	obj.email = email;
+	obj.accountid = localStorage.getItem("accountId");
+
+	alert("Username: " +obj.uname+ "    VendorName: " +obj.vname+ "    Email: " +email+ "     Phone: " +obj.phone+ "     AccountID: " +obj.accountid);
+	
+	$.ajax({
+		type : "POST",
+		url : 'https://localhost:3000/registerRPWithFIDO',
+		data : JSON.stringify(obj),
+		async : false,
+		headers : {
+			'content-type' : 'application/json',
+			'accept' : 'application/json'
+		},
+		success : function(result) {
+			alert("success");
+			if (result) {
+				alert("Please enter OTP from you mobile device: " + result);
+				if (typeof(Storage) !== "undefined") {
+				    // Store
+				    localStorage.setItem("otp", result);
+				}
+				//Go to below page to display the QR code form of the OTP.
+				window.location.href = 'otp_qr_display';
+			} else {
+				alert("No Data");
+			}
+		},
+		error : function(result) {
+			alert("error");
+		}
+	});
+	
+}</script>
+</head>
+<body>
+<form>
+		<header>
+		<h1>HDFC Bank</h1>
+		<img src="images/HDFC_Bank_Logo.jpg" alt="moon" /> 
+		</header>
+		<div id="fidoregister">
+			<h1>
+				<strong>Welcome.</strong> Please Enter Email ID to be associated while registering with FIDO services.
+			</h1>
+			<fieldset>
+				<p>
+				<!-- <label for="uname">Display Name: </label> <input id="uname" type="text" placeholder="Username" required /> <br>
+				<label for="vname">RP Display Name: </label> <input id="vname" type="text" placeholder="Vendor Name" required /> <br>
+				<label for="phone">Phone Number: </label> <input id="phone" type="tel" placeholder="Phone Number" required /> <br> -->
+				<label for="email">Email: </label> <input id="email" type="email" placeholder="Email address" required /> <br>
+				<!-- <label for="accountid">AccountID: </label> <input id="accountid" type="number" placeholder="Account ID" required /> <br> -->
+				</p>
+				<p>
+					<button type="button" id="regfido" onclick="callRegWithFIDOScript(document.getElementById('email').value)">Register With FIDO</button>
+				</p>
+			</fieldset>
+		</div>
+	</form>
+</body>
+</html>

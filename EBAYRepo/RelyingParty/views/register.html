@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Registration Details</title>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript">
+	function registerUser(uname, pwd, phone, email) {
+		
+		alert("Username: " +uname+ "     Password: " +pwd+ "      Mobile: " +phone+ "      Email: " +email);
+		
+		var obj = {};
+		obj.uname = uname;
+		obj.pwd = pwd;
+		obj.phone = phone;
+		obj.email = email;
+		
+		$.ajax({
+			type : "POST",
+			url : 'https://localhost:3000/signup',
+			data : JSON.stringify(obj),
+			async : false,
+			headers : {
+				'content-type' : 'application/json',
+				'accept' : 'application/json'
+			},
+			success : function(result) {
+				alert("success");
+				if (result) {
+					//alert(result);
+					if(result === 'Success'){
+						window.location.href = 'account';
+					}
+					else {
+						alert(result);
+					}
+					
+				} else {
+					alert("No Data");
+				}
+			},
+			error : function(result) {
+				alert("error");
+			}
+		});
+	}
+</script>
+</head>
+<body>
+<form>
+		<header>
+			<h1>PSL Digital Bank</h1>
+		</header>
+		<div id="login">
+			<fieldset>
+				 <p>
+				 	
+					<label for="username">Username</label>
+					<input id="username" type="text" placeholder="Username" required /><br>
+					
+					<label for="pwd">Password</label>
+					<input id="pwd" type="password" placeholder="Password" required /><br>
+					
+					<label for="phone">Mobile</label>
+					<input id="phone" type="tel" placeholder="Mobile Number" required /><br>
+					
+					<label for="email">Email</label>
+					<input id="email" type="email" placeholder="Email Address" required /><br>
+					
+				</p>
+				<p>
+					<button type="button" id="registerbtn"
+						onclick="registerUser(document.getElementById('username').value, document.getElementById('pwd').value, document.getElementById('phone').value, document.getElementById('email').value) ">Register</button>
+				</p>
+			</fieldset>
+			</div>
+	</form> 
+</body>
+</html>

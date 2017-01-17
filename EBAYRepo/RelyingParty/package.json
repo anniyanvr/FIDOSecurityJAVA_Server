@@ -1,0 +1,36 @@
+{
+  "name": "RelyingParty",
+  "version": "0.0.1",
+  "main": "app.js",
+  "browser": "C:/Users/jasmira_fernandes/AppData/Roaming/npm/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-cipher/node_modules/browserify-aes/browser.js",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "apn": "^1.7.5",
+    "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.1",
+    "browserify": "^13.0.0",
+    "ejs": "*",
+    "express": "^3.2.6",
+    "fs": "0.0.2",
+    "https": "^1.0.0",
+    "jsonwebtoken": "^7.0.0",
+    "lodash": "^4.13.1",
+    "mongodb": "^1.4.4",
+    "mongoose": "4.4.17",
+    "mongoskin": "^2.1.0",
+    "monk": "^1.0.1",
+    "node-rest-client": "^1.8.0",
+    "path": "^0.12.7",
+    "q": "^1.4.1",
+    "qr-image": "^3.1.0",
+    "querystring": "0.2.0",
+    "request": "^2.72.0",
+    "sleep": "^3.0.1",
+    "url": "^0.11.0",
+    "waitfor": "^0.1.3"
+  }
+}

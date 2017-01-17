@@ -1,0 +1,5 @@
+1480314123079	Move 1 resources to 'fidouaf'
+1480315561118	Move file
+1480317297035	Infer generic type arguments
+1480335591726	Convert local variable 'dateFormat' to field
+1480335599854	Encapsulate field 'dateFormat'

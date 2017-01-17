@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="org.psl.fidouaf.entity.TransactionDetails" table="transactiondb">
+      <meta attribute="class-description">
+         This class contains the transaction details of each user. 
+      </meta>
+      <id name="accountId" type="int" column="accountid">
+         <!-- <generator class="assigned"/> -->
+      </id>
+      <property name="amount_transferred" column="amount_transferred" type="string"/>
+      <property name="username" column="username" type="string"/>
+      <property name="to" column="toAccount" type="string"/>
+      <property name="appId" column="appid" type="string"/>
+   </class>
+</hibernate-mapping>

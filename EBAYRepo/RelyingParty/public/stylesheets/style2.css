@@ -1,0 +1,38 @@
+@CHARSET "ISO-8859-1";
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 5px;
+}
+
+strong {
+	font-weight: bold;
+}
+
+body {
+	background-color: #f4f4f4;
+	color: #5a5656;
+	font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 1.5em;
+}
+
+caption {
+display: table-caption;
+text-align: left;
+font-size: 20px;
+}
+
+button {
+	position: absolute; 
+	top: 50px; 
+	right: 80px;
+}
+
+#logout {
+	position: absolute; 
+	top: 100px; 
+	right: 80px;
+}

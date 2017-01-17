@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract local variable &apos;dataToStore2&apos; from expression &apos;dataToStore&apos;&#x0D;&#x0A;- Original project: &apos;fidouaf&apos;&#x0D;&#x0A;- Variable name: &apos;dataToStore2&apos;&#x0D;&#x0A;- Destination method: &apos;org.ebayopensource.fidouaf.res.FidoUafResource.processIOSRegResponse()&apos;&#x0D;&#x0A;- Variable expression: &apos;dataToStore&apos;&#x0D;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;dataToStore2&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src\/main\/java&lt;org.ebayopensource.fidouaf.res{FidoUafResource.java" name="dataToStore2" replace="true" selection="8071 11" stamp="1460364831482" version="1.0"/>
+</session>

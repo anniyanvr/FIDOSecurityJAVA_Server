@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Account Details</title>
+<link rel="stylesheet" type="text/css" href="stylesheets/style2.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> 
+<script type="text/javascript">
+function callRegisterRPScript(){
+	window.location.href = 'registerfido';
+}
+
+function goToIndex(){
+	window.location.href = '/'
+}
+</script>
+</head>
+<body>
+<h1> <strong>Hi Jasmira!!!</strong></h1>
+<h2> <strong>Welcome to your Account </strong></h2>
+</br>
+</br>
+<table style="width:100%">
+<caption>Balance Details: </caption>
+  <tr>
+    <th>Date</th>
+    <th>Particular</th>		
+    <th>Cheque No.</th>
+    <th>Debit Rs. P.</th>
+    <th>Credit Rs. P.</th>
+    <th>Balance Rs. P.</th>
+  </tr>
+  <tr>
+    <td>04/01/2016</td>
+    <td>To Self</td>		
+    <td>356376</td>
+    <td>35,000.00</td>
+    <td> </td>
+    <td>50,782.00</td>
+  </tr>
+  <tr>
+     <td>17/01/2016</td>
+    <td>Bishamber & Co.</td>		
+    <td> </td>
+    <td> </td>
+    <td>62,800.00</td>
+    <td>1,13,582</td>
+  </tr>
+  <tr>
+     <td>05/02/2016</td>
+    <td>Maruti Suzuki India Ltd.</td>		
+    <td>456734</td>
+    <td>15,000.00</td>
+    <td> </td>
+    <td>98,582.00</td>
+  </tr>
+  <tr>
+     <td>25/03/2016</td>
+    <td>To Self</td>		
+    <td>555677</td>
+    <td>20,000.00</td>
+    <td> </td>
+    <td>78,582.00</td>
+  </tr>
+  <tr>
+    <td>18/04/2016</td>
+    <td>Reliance Insurance</td>		
+    <td> </td>
+    <td>30,000.00</td>
+    <td> </td>
+    <td>48,582.00</td>
+  </tr>
+</table>
+<br>
+<br>
+<p>
+	<button type="button" id="regRPbtn" onclick="callRegisterRPScript()">Register with FIDO</button>
+	<button type="button" id="logout" onClick="goToIndex();">LogOut</button>
+</p>
+</body>
+</body>
+</html>

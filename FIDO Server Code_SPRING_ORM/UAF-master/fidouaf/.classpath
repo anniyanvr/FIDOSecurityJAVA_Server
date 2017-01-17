@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
+	<classpathentry kind="lib" path="D:/FIDO Server Code_SPRING_ORM/dependency jars/Hibernate jars/hibernate-release-5.2.2.Final/hibernate-release-5.2.2.Final/lib/required/hibernate-core-5.2.2.Final.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

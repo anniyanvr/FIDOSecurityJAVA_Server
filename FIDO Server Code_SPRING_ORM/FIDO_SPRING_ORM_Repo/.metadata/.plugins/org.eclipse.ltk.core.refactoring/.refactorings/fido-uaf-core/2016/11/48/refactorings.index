@@ -1,0 +1,47 @@
+1479725169267	Copy compilation units
+1479725181042	Delete element
+1479725185677	Delete element
+1479725483380	Copy compilation unit
+1479725489959	Delete element
+1479815450469	Delete element
+1479815497494	Delete element
+1479815504399	Delete element
+1479815517489	Delete element
+1479880519894	Encapsulate field 'serverDataExpiryInMs'
+1479881191136	Encapsulate field 'serverDataExpiryInMs'
+1479881602709	Rename package 'org.psl.fido.uaf.crypto'
+1479881618529	Rename package 'org.psl.fido.uaf.ops'
+1479881639024	Rename package 'org.psl.fido.uaf.msg'
+1479881656049	Rename package 'org.psl.fido.uaf.ri.client'
+1479881666804	Rename package 'org.psl.fido.uaf.storage'
+1479881680304	Rename package 'org.psl.fido.uaf.tlv'
+1479881699870	Rename type 'CertificateValidator'
+1479881712140	Rename type 'CertificateValidatorImpl'
+1479881727725	Move compilation units
+1479882288150	Move compilation units
+1479882482730	Move compilation unit
+1479882489325	Move compilation unit
+1479882496375	Move compilation unit
+1479882969462	Move compilation unit
+1479882975782	Move compilation unit
+1479882979737	Move compilation unit
+1479883049787	Move compilation unit
+1479883100587	Move compilation units
+1479883114977	Delete element
+1479883153922	Move compilation unit
+1479883260232	Rename package 'org.ebayopensource.fido.uaf.crypto'
+1479883283420	Rename package 'org.ebayopensource.fido.uaf.msg'
+1479883294470	Rename package 'org.ebayopensource.fido.uaf.ops'
+1479883309745	Rename package 'org.ebayopensource.fido.uaf.ri.client'
+1479883341310	Rename package 'org.ebayopensource.fido.uaf.tlv'
+1479883405135	Move compilation unit
+1479883492255	Convert local variable 'result' to field
+1479883513420	Encapsulate field 'result'
+1479883738885	Convert local variable 'sha256' to field
+1479883744450	Encapsulate field 'sha256'
+1479883824845	Move compilation unit
+1479884027981	Convert local variable 'tags' to field
+1479884035451	Encapsulate field 'tags'
+1479884251831	Rename package 'org.psl.fidouaf.core.test.msg'
+1479884498349	Convert local variable 'pub' to field
+1479884630559	Convert local variable 'pub' to field

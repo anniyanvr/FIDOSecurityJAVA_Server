@@ -1,0 +1,11 @@
+#back {
+	position: absolute; 
+	top: 200px; 
+	right: 80px;
+}
+
+#logout {
+	position: absolute;
+	top: 200px;
+	left: 80px;
+}
