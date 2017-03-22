@@ -1,0 +1,27 @@
+server key/Authorization:key: AIzaSyAKxN6RAkSXjvpLK2j8zASsKo6Yub_wSH8
+
+device Token: dLU7qDa2w04:APA91bFuddtyzg7jNw_SJr27NFvbZDq2KXoJUTlMRw9drPXaohrPchNphfWZgPzstzhgm_TN19qgCvu4KwHA85J-PiJRSAF4Bx-2x79wCGMdh9CKydgoLNpuXgnnKWrovj8n24Xm3oiA 
+
+sender id: 1036598535327
+
+url: https://fcm.googleapis.com/fcm/send
+
+
+{
+   "to" : "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...",
+   "data" : {
+     "Nick" : "Mario",
+     "body" : "great match!",
+     "Room" : "PortugalVSDenmark"
+   },
+ }
+ 
+ header:
+ project_id: SENDER_ID
+ 
+ 
+ 
+ Note: If your organization has a firewall that restricts the traffic to or from the Internet, you'll need to configure it to allow connectivity with GCM. The ports to open are: 5228, 5229, and 5230. GCM typically only uses 5228, but it sometimes uses 5229 and 5230. GCM doesn't provide specific IPs. It changes IPs frequently. We recommend against using ACLs but if you must use them, take a broad approach such as the method suggested in this support link.
+ 
+port: 5228, host: mtalk.google.com
+port: 443, host: android.googleapis.com

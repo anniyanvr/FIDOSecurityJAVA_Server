@@ -1,0 +1,74 @@
+A] create table vendordb (accountid varchar(30) not null primary key, displayname varchar(20) not null, rpdisplayname varchar(30) not null, email varchar(80), otp varchar(10), vendor_regstats boolean, otp_creationdate datetime);
+
+mysql> desc vendordb;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| accountid        | varchar(30) | NO   | PRI | NULL    |       |
+| displayname      | varchar(20) | NO   |     | NULL    |       |
+| rpdisplayname    | varchar(30) | NO   |     | NULL    |       |
+| email            | varchar(80) | YES  |     | NULL    |       |
+| otp              | varchar(10) | YES  |     | NULL    |       |
+| vendor_regstats  | tinyint(1)  | YES  |     | NULL    |       |
+| otp_creationdate | datetime    | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+7 rows in set (0.03 sec)
+
+
+=================================================================================================================================================================
+B] create table devicedetails (deviceid varchar(50) not null primary key, devicetoken longtext not null);
+
+mysql> desc devicedetails;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| deviceid    | varchar(50) | NO   | PRI | NULL    |       |
+| devicetoken | longtext    | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+
+=================================================================================================================================================================
+C] create table registrationdb (deviceid varchar(50) not null, rpaccountname varchar(50), regstats boolean, rpaccountid varchar(30), auth_in_progress boolean, authstats boolean, FOREIGN KEY (deviceid) REFERENCES devicedetails(deviceid), FOREIGN KEY (rpaccountid) REFERENCES vendordb(accountid));
+
+mysql> desc registrationdb;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| deviceid         | varchar(50) | NO   | MUL | NULL    |       |
+| rpaccountname    | varchar(50) | YES  |     | NULL    |       |
+| regstats         | tinyint(1)  | YES  |     | NULL    |       |
+| rpaccountid      | varchar(30) | YES  | MUL | NULL    |       |
+| auth_in_progress | tinyint(1)  | YES  |     | NULL    |       |
+| authstats        | tinyint(1)  | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.04 sec)
+
+
+=================================================================================================================================================================
+D] create table key_info (deviceid varchar(50) not null, rpaccountid varchar(30), publickey longtext, aaid_keyid longtext, FOREIGN KEY (deviceid) REFERENCES registrationdb(deviceid), FOREIGN KEY (rpaccountid) REFERENCES registrationdb(rpaccountid));
+
+mysql> desc key_info;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| deviceid    | varchar(50) | NO   | MUL | NULL    |       |
+| rpaccountid | varchar(30) | YES  | MUL | NULL    |       |
+| publickey   | longtext    | YES  |     | NULL    |       |
+| aaid_keyid  | longtext    | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+
+=================================================================================================================================================================
+E] create table transactiondb (accountid varchar(30), contents longtext, appid longtext, FOREIGN KEY (accountid) REFERENCES registrationdb(rpaccountid));
+
+mysql> desc transactiondb;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| accountid | varchar(30) | YES  | MUL | NULL    |       |
+| contents  | longtext    | YES  |     | NULL    |       |
+| appid     | longtext    | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)

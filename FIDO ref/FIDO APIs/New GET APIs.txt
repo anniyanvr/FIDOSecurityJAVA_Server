@@ -1,0 +1,36 @@
+NEW GET APIs:
+1) Reg Request api with params: username
+	http://localhost:8080/fidouaf_test/v1/public/regRequest?username=jasmira
+
+2) Reg Request api with params: username, appId
+	http://localhost:8080/fidouaf_test/v1/public/regRequest?username=jasmira&appId=www.fidopersistent.pslbank.com
+
+3) Reg Response status api with params: rpaccountid
+	http://localhost:8080/fidouaf_test/v1/public/regResponseStatus?rpaccountid=108
+
+4) Auth Response status api with params: rpaccountid
+	http://localhost:8080/fidouaf_test/v1/public/getAuthResponseStatus?rpaccountid=108
+	
+5) Clear Auth Response status api with no params
+	http://localhost:8080/fidouaf_test/v1/public/clearAuthResponse
+	
+6) Auth Request api with no params
+	http://localhost:8080/fidouaf_test/v1/public/authRequest
+	
+7) Auth Request api for customized policy with params: deviceid, accountid
+	http://localhost:8080/fidouaf_test/v1/public/authRequest/customPolicy?deviceid=eeyyggert&accountid=108
+	
+8) Auth Request api with params: appId
+	http://localhost:8080/fidouaf_test/v1/public/authRequest?appId=www.fidopersistent.pslbank.com
+	
+9) Auth Request api with params: appId, trxContent
+	http://localhost:8080/fidouaf_test/v1/public/authRequest?appId=www.fidopersistent.pslbank.com&trxContent=some content
+	
+10) Auth Request api for customized policy with params: deviceid, accountid, appId, trxContent
+	http://localhost:8080/fidouaf_test/v1/public/authRequest/customPolicy?deviceid=eeyyggert&accountid=108&appId=www.fidopersistent.pslbank.com&trxContent=some content
+
+11) Logout api with no params
+	http://localhost:8080/fidouaf_test/v1/public/dologout
+
+12) Auth Request api for flexible policy with params: accountid
+	http://localhost:8080/fidouaf_test/v1/public/authRequest/flexiblePolicy?accountid=108

@@ -1,0 +1,18 @@
+Environment variables:
+
+ANDROID_HOME  C:\Users\nitin_desai\AppData\Local\Android\sdk
+GRADLE_HOME   C:\Program Files\gradle-2.10-bin\gradle-2.10
+JAVA_HOME   C:\Program Files\Java\jdk1.7.0_51
+M2_HOME   C:\Apache_Maven2.2.1\apache-maven-2.2.1-bin\apache-maven-2.2.1
+MAVEN_HOME   C:\Apache_Maven2.2.1\apache-maven-2.2.1-bin\apache-maven-2.2.1
+OPENSSL_CONF   C:\openssl-0.9.8k_X64\openssl.cnf
+PATH   C:\Users\jasmira_fernandes\AppData\Roaming\npm
+PYTHON   C:\Python27\python.exe
+
+
+System Variables:
+JAVA_HOME   C:\Program Files\Java\jdk1.7.0_45
+M2_HOME   C:\Apache_Maven2.2.1\apache-maven-2.2.1-bin\apache-maven-2.2.1
+MAVEN_HOME   C:\Apache_Maven2.2.1\apache-maven-2.2.1-bin\apache-maven-2.2.1
+OPENSSL_CONF   C:\openssl-0.9.8k_X64\openssl.cnf
+Path   append --> ;C:\Program Files\Java\jdk1.7.0_45\bin;C:\Users\nitin_desai\AppData\Local\Android\sdk\tools;C:\Program Files\gradle-2.10-bin\gradle-2.10\bin;C:\openssl-0.9.8k_X64;C:\Program Files\nodejs\;C:\Program Files (x86)\Brackets\command;C:\Apache_Maven2.2.1\apache-maven-2.2.1-bin\apache-maven-2.2.1\bin;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Python27\python.exe;C:\Program Files\nodejs

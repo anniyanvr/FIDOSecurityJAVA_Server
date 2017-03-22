@@ -1,0 +1,39 @@
+	public String username;
+	public String password;
+	public String email;
+	public String phoneNumber;
+	public int accountId;
+	
+Table creation for New RP:
+STEP 1:
+	create table userdetails(accountid int(16) auto_increment, username varchar(50), password longtext, email varchar(80), phonenumber varchar(20), PRIMARY KEY (accountid));
+	
+
+STEP 2:
+	ALTER TABLE userdetails AUTO_INCREMENT=101;
+	
+	desc userdetails;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| accountid   | int(16)     | NO   | PRI | NULL    | auto_increment |
+| username    | varchar(50) | YES  |     | NULL    |                |
+| password    | longtext    | YES  |     | NULL    |                |
+| email       | varchar(80) | YES  |     | NULL    |                |
+| phonenumber | varchar(20) | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+	
+Just to re-check the auto increment:
+STEP 3:
+	insert into userdetails (username, password, email, phonenumber) values("jas", "abc", "jas@gmail.com", "9158401132");
+	insert into userdetails (username, password, email, phonenumber) values("amogh", "xyz", "amogh@gmail.com", "9923411825");
+
+	
+STEP 4:
+	select * from userdetails;
++-----------+----------+----------+-----------------+-------------+
+| accountid | username | password | email           | phonenumber |
++-----------+----------+----------+-----------------+-------------+
+|       101 | jas      | abc      | jas@gmail.com   | 9158401132  |
+|       102 | amogh    | xyz      | amogh@gmail.com | 9923411825  |
++-----------+----------+----------+-----------------+-------------+

@@ -1,0 +1,141 @@
+Table schema for FIDO server with SPRING and HIBERNATE
+
+mysql> show tables;
++------------------------+
+| Tables_in_fidodatabase |
++------------------------+
+| devicedetails          |
+| key_info               |
+| registrationdb         |
+| transactiondb          |
+| vendordb               |
++------------------------+
+
+******************************************************************************************************************************************************************
+1) mysql> desc devicedetails;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| deviceid    | varchar(255) | NO   | PRI | NULL    |       |
+| devicetoken | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+
+==> show create table devicedetails
+| devicedetails | CREATE TABLE `devicedetails` (
+  `deviceid` varchar(255) NOT NULL,
+  `devicetoken` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`deviceid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+
+
+2) mysql> desc key_info;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| aaid_keyid  | varchar(255) | NO   | PRI | NULL    |       |
+| deviceid    | varchar(255) | YES  | MUL | NULL    |       |
+| publickey   | varchar(255) | YES  |     | NULL    |       |
+| rpaccountid | int(11)      | YES  | MUL | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+
+==> show create table key_info
+| key_info | CREATE TABLE `key_info` (
+  `aaid_keyid` varchar(255) NOT NULL,
+  `deviceid` varchar(255) DEFAULT NULL,
+  `publickey` varchar(255) DEFAULT NULL,
+  `rpaccountid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`aaid_keyid`),
+  KEY `rpaccountid` (`rpaccountid`),
+  KEY `deviceid` (`deviceid`),
+  CONSTRAINT `key_info_ibfk_2` FOREIGN KEY (`deviceid`) REFERENCES `registration
+db` (`deviceid`),
+  CONSTRAINT `key_info_ibfk_1` FOREIGN KEY (`rpaccountid`) REFERENCES `registrat
+iondb` (`rpaccountid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+
+
+3) mysql> desc registrationdb;
++-------------------------+--------------+------+-----+---------+-------+
+| Field                   | Type         | Null | Key | Default | Extra |
++-------------------------+--------------+------+-----+---------+-------+
+| rpaccountid             | int(11)      | NO   | PRI | NULL    |       |
+| authenticators_enforced | varchar(255) | YES  |     | NULL    |       |
+| auth_in_progress        | bit(1)       | YES  |     | NULL    |       |
+| authstats               | bit(1)       | YES  |     | NULL    |       |
+| context                 | varchar(255) | YES  |     | NULL    |       |
+| deviceid                | varchar(255) | YES  | MUL | NULL    |       |
+| regstats                | tinyint(1)   | YES  |     | NULL    |       |
+| rpaccountname           | varchar(255) | YES  |     | NULL    |       |
++-------------------------+--------------+------+-----+---------+-------+
+
+==> show create table registrationdb
+| registrationdb | CREATE TABLE `registrationdb` (
+  `rpaccountid` int(11) NOT NULL,
+  `authenticators_enforced` varchar(255) DEFAULT NULL,
+  `auth_in_progress` bit(1) DEFAULT NULL,
+  `authstats` bit(1) DEFAULT NULL,
+  `context` varchar(255) DEFAULT NULL,
+  `deviceid` varchar(255) DEFAULT NULL,
+  `regstats` tinyint(1) DEFAULT NULL,
+  `rpaccountname` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`rpaccountid`),
+  KEY `deviceid` (`deviceid`),
+  CONSTRAINT `registrationdb_ibfk_1` FOREIGN KEY (`rpaccountid`) REFERENCES `ven
+dordb` (`accountid`),
+  CONSTRAINT `registrationdb_ibfk_2` FOREIGN KEY (`deviceid`) REFERENCES `device
+details` (`deviceid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+
+
+4) mysql> desc transactiondb;
++--------------------+--------------+------+-----+---------+-------+
+| Field              | Type         | Null | Key | Default | Extra |
++--------------------+--------------+------+-----+---------+-------+
+| accountid          | int(11)      | NO   | PRI | 0       |       |
+| amount_transferred | varchar(255) | NO   | PRI |         |       |
+| username           | varchar(255) | YES  |     | NULL    |       |
+| toAccount          | varchar(255) | NO   | PRI |         |       |
+| appid              | varchar(255) | YES  |     | NULL    |       |
++--------------------+--------------+------+-----+---------+-------+
+
+==> show create table transactiondb
+| transactiondb | CREATE TABLE `transactiondb` (
+  `accountid` int(11) NOT NULL DEFAULT '0',
+  `amount_transferred` varchar(255) NOT NULL DEFAULT '',
+  `username` varchar(255) DEFAULT NULL,
+  `toAccount` varchar(255) NOT NULL DEFAULT '',
+  `appid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`accountid`,`amount_transferred`,`toAccount`),
+  CONSTRAINT `transactiondb_ibfk_1` FOREIGN KEY (`accountid`) REFERENCES `regist
+rationdb` (`rpaccountid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+
+
+5) mysql> desc vendordb;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| accountid        | int(11)      | NO   | PRI | NULL    |       |
+| email            | varchar(255) | YES  |     | NULL    |       |
+| otp              | varchar(255) | YES  |     | NULL    |       |
+| otp_creationdate | datetime     | YES  |     | NULL    |       |
+| displayname      | varchar(255) | YES  |     | NULL    |       |
+| rpdisplayname    | varchar(255) | YES  |     | NULL    |       |
+| vendor_regstats  | tinyint(1)   | NO   |     | 0       |       |
++------------------+--------------+------+-----+---------+-------+
+
+==> show create table vendordb
+| vendordb | CREATE TABLE `vendordb` (
+  `accountid` int(11) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `otp` varchar(255) DEFAULT NULL,
+  `otp_creationdate` datetime DEFAULT NULL,
+  `displayname` varchar(255) DEFAULT NULL,
+  `rpdisplayname` varchar(255) DEFAULT NULL,
+  `vendor_regstats` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`accountid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |

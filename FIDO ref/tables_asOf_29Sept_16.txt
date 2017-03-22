@@ -1,0 +1,205 @@
+A] Tables for rpdatabase Database
+
+mysql> show tables;
++----------------------+
+| Tables_in_rpdatabase |
++----------------------+
+| context_details      |
+| userdetails          |
++----------------------+
+
+1) mysql> desc context_details;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| context        | varchar(20) | NO   | PRI | NULL    |       |
+| authenticators | longtext    | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+
+mysql> select * from context_details;
++---------+---------------------+
+| context | authenticators      |
++---------+---------------------+
+| Home    | PIN0#0001           |
+| Office  | TCH0#0001           |
+| Other   | PIN0#0001,TCH0#0001 |
++---------+---------------------+
+
+create table details:
+| context_details | CREATE TABLE `context_details` (
+  `context` varchar(20) NOT NULL,
+  `authenticators` longtext NOT NULL,
+  PRIMARY KEY (`context`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+
+2) mysql> desc userdetails;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| accountid   | int(16)     | NO   | PRI | NULL    | auto_increment |
+| username    | varchar(50) | YES  |     | NULL    |                |
+| password    | longtext    | YES  |     | NULL    |                |
+| email       | varchar(80) | YES  |     | NULL    |                |
+| phonenumber | varchar(20) | YES  |     | NULL    |                |
+| token       | varchar(50) | YES  |     | NULL    |                |
+| context     | varchar(20) | YES  | MUL | NULL    |                |
+| aaids       | longtext    | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+
+create table details:
+| userdetails | CREATE TABLE `userdetails` (
+  `accountid` int(16) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) DEFAULT NULL,
+  `password` longtext,
+  `email` varchar(80) DEFAULT NULL,
+  `phonenumber` varchar(20) DEFAULT NULL,
+  `token` varchar(50) DEFAULT NULL,
+  `context` varchar(20) DEFAULT NULL,
+  `aaids` longtext,
+  PRIMARY KEY (`accountid`),
+  KEY `context` (`context`),
+  CONSTRAINT `userdetails_ibfk_1` FOREIGN KEY (`context`) REFERENCES `context_de
+tails` (`context`)
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=latin1 |
+
+
+
+*****************************************************************************************************************************************************************
+*****************************************************************************************************************************************************************
+
+
+B] Tables for fidodatabase Database
+
+mysql> show tables;
++------------------------+
+| Tables_in_fidodatabase |
++------------------------+
+| devicedetails          |
+| key_info               |
+| registrationdb         |
+| transactiondb          |
+| vendordb               |
++------------------------+
+
+1) mysql> desc devicedetails;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| deviceid    | varchar(50) | NO   | PRI | NULL    |       |
+| devicetoken | longtext    | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+create table details:
+| devicedetails | CREATE TABLE `devicedetails` (
+  `deviceid` varchar(50) NOT NULL,
+  `devicetoken` longtext NOT NULL,
+  PRIMARY KEY (`deviceid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+
+2) mysql> desc registrationdb;
++-------------------------+-------------+------+-----+---------+-------+
+| Field                   | Type        | Null | Key | Default | Extra |
++-------------------------+-------------+------+-----+---------+-------+
+| deviceid                | varchar(50) | NO   | MUL | NULL    |       |
+| rpaccountname           | varchar(50) | YES  |     | NULL    |       |
+| regstats                | tinyint(1)  | YES  |     | NULL    |       |
+| rpaccountid             | varchar(30) | YES  | MUL | NULL    |       |
+| auth_in_progress        | tinyint(1)  | YES  |     | NULL    |       |
+| authstats               | tinyint(1)  | YES  |     | NULL    |       |
+| context                 | varchar(20) | YES  |     | NULL    |       |
+| authenticators_enforced | longtext    | YES  |     | NULL    |       |
++-------------------------+-------------+------+-----+---------+-------+
+
+create table details:
+| registrationdb | CREATE TABLE `registrationdb` (
+  `deviceid` varchar(50) NOT NULL,
+  `rpaccountname` varchar(50) DEFAULT NULL,
+  `regstats` tinyint(1) DEFAULT NULL,
+  `rpaccountid` varchar(30) DEFAULT NULL,
+  `auth_in_progress` tinyint(1) DEFAULT NULL,
+  `authstats` tinyint(1) DEFAULT NULL,
+  `context` varchar(20) DEFAULT NULL,
+  `authenticators_enforced` longtext,
+  KEY `deviceid` (`deviceid`),
+  KEY `rpaccountid` (`rpaccountid`),
+  CONSTRAINT `registrationdb_ibfk_1` FOREIGN KEY (`deviceid`) REFERENCES `device
+details` (`deviceid`),
+  CONSTRAINT `registrationdb_ibfk_2` FOREIGN KEY (`rpaccountid`) REFERENCES `ven
+dordb` (`accountid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+
+3) mysql> desc vendordb;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| accountid        | varchar(30) | NO   | PRI | NULL    |       |
+| displayname      | varchar(20) | NO   |     | NULL    |       |
+| rpdisplayname    | varchar(30) | NO   |     | NULL    |       |
+| email            | varchar(80) | YES  |     | NULL    |       |
+| otp              | varchar(10) | YES  |     | NULL    |       |
+| vendor_regstats  | tinyint(1)  | YES  |     | NULL    |       |
+| otp_creationdate | datetime    | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+
+create table details:
+| vendordb | CREATE TABLE `vendordb` (
+  `accountid` varchar(30) NOT NULL,
+  `displayname` varchar(20) NOT NULL,
+  `rpdisplayname` varchar(30) NOT NULL,
+  `email` varchar(80) DEFAULT NULL,
+  `otp` varchar(10) DEFAULT NULL,
+  `vendor_regstats` tinyint(1) DEFAULT NULL,
+  `otp_creationdate` datetime DEFAULT NULL,
+  PRIMARY KEY (`accountid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+
+4) mysql> desc key_info;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| deviceid    | varchar(50) | NO   | MUL | NULL    |       |
+| rpaccountid | varchar(30) | YES  | MUL | NULL    |       |
+| publickey   | longtext    | YES  |     | NULL    |       |
+| aaid_keyid  | longtext    | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+create table details:
+| key_info | CREATE TABLE `key_info` (
+  `deviceid` varchar(50) NOT NULL,
+  `rpaccountid` varchar(30) DEFAULT NULL,
+  `publickey` longtext,
+  `aaid_keyid` longtext,
+  KEY `deviceid` (`deviceid`),
+  KEY `rpaccountid` (`rpaccountid`),
+  CONSTRAINT `key_info_ibfk_1` FOREIGN KEY (`deviceid`) REFERENCES `registration
+db` (`deviceid`),
+  CONSTRAINT `key_info_ibfk_2` FOREIGN KEY (`rpaccountid`) REFERENCES `registrat
+iondb` (`rpaccountid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+
+5) mysql> desc transactiondb;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| accountid | varchar(30) | YES  | MUL | NULL    |       |
+| contents  | longtext    | YES  |     | NULL    |       |
+| appid     | longtext    | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+create table details:
+| transactiondb | CREATE TABLE `transactiondb` (
+  `accountid` varchar(30) DEFAULT NULL,
+  `contents` longtext,
+  `appid` longtext,
+  KEY `accountid` (`accountid`),
+  CONSTRAINT `transactiondb_ibfk_1` FOREIGN KEY (`accountid`) REFERENCES `regist
+rationdb` (`rpaccountid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+
+*****************************************************************************************************************************************************************
+*****************************************************************************************************************************************************************

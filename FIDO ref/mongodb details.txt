@@ -1,0 +1,64 @@
+A] Registration
+Implement RP Storage - done
+Create QR code and display it on a fresh page - done
+write code where java api tell abt sucess of registration to node js api  - done
+display as success on RP - done
+set timer to wait for 30 seconds  - done
+
+B] Authentication
+- write logic to check if isregistered is true, if yes then send push notifications and then move the user to accounts page. -- done
+- clean up localstorage to restart the whole flow again. -- done
+
+
+
+[5/20/2016 12:29 PM] Vipindas Nambiar: 
+var healthCenterSchema = {
+    "id" : { type: String},
+    "name" : { type: String},
+    "location": {
+        type: {type:String},
+        coordinates: Array
+    },
+    "facilities" :  { type: Array, default:[] },
+    "no_of_beds" : { type: Number},
+    "photo" : { type: String, default: ''},
+    "contact_no" : { type: String, default: ''},
+    "address" : { type: String, default: ''},
+    "doctors" :  [{ type : mongoose.Schema.Types.ObjectId, ref: 'doctor' , index: true}],
+    "createdDate": { type: Date, default: Date.now },
+	"modifiedDate": { type: Date, default: Date.now }
+};
+
+var healthCenterSchemaObj = new dbObj.Schema(healthCenterSchema,{collection:"health_centers",versionKey: false});
+var healthCenterObj = dbObj.model("health_centers", healthCenterSchemaObj); 
+
+
+ healthCenterModel.create(healthCenterReq,function(err,hc){
+        if(hc){
+            res.status(200).send({"apiStatus":"Success","healthcenter":hc});
+        }
+        else{
+            console.log(err);
+            res.status(500).send({"apiStatus":"failure","message":"Error While Adding Health Center"});
+        }
+    }); 
+	
+Above query is used to insert
+
+To update can use below:
+healthCenterModel.find({_id: req.params.healthcenterid}).exec(function (err, healthcenter) {
+		  
+            if(err){
+                console.log('HEREEEE'+ err);
+                res.status(404).send(err);
+            }
+            res.status(200).send(healthcenter);
+        }); 
+
+
+		
+		
+		
+To Read:
+https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
+https://gist.github.com/fwielstra/1025038

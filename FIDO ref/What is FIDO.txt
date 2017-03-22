@@ -1,0 +1,20 @@
+FIDO (Internet Source: http://searchsecurity.techtarget.com/definition/FIDO-Fast-Identity-Online)
+
+- FIDO (Fast ID Online) is a security specifications for strong authentication. FIDO is developed by an organization called the FIDO Alliance in 2012.  
+- FIDO specifications supports:
+1) multifactor authentication (MFA) and 
+2) public key cryptography.
+- A major benefit of FIDO-compliant authentication is the fact that users don't need to use complex passwords, deal with complex strong password rules and or go through recovery procedures when they forget a password.
+- Unlike password databases, FIDO stores personally identifying information (PII) such as biometric authentication data locally on the user's device to protect it. 
+- FIDO's local storage of biometrics and other personal identification is intended to ease user concerns about personal data stored on an external server in the cloud.
+- The FIDO protocol implementation is done using the application programming interfaces (APIs), which reduces the work required for developers to create secure logins for mobile clients running different operating systems (OSes) on different types of hardware.
+- FIDO supports:
+1) Universal Authentication Framework (UAF) protocol and 
+2) Universal Second Factor (U2F) protocol.
+- UAF:
+1) With UAF, the client device creates a new key pair during registration with an online service and retains the private key; the public key is registered with the online service. 
+2) During authentication, the client device proves possession of the private key to the service by signing a challenge, which involves a user–friendly action such as providing a fingerprint, entering a PIN or speaking into a microphone.
+- U2F:
+1) With U2F, registration process is same as UAF.
+2) authentication requires a strong second factor such as a Near Field Communication (NFC) tap or USB security token.
+- Main alliance website: https://fidoalliance.org/specifications/overview/

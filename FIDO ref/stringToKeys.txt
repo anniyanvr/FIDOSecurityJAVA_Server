@@ -1,0 +1,28 @@
+[3/14/2016 12:17 PM] Sudhakar Shenoy: 
+hv u looked at com.psl.fidoserve.DecodeBase64String
+it does. but its taking the encoded string, instead of key
+let me check again
+
+String encodedString = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAySv53RFnbPtWUoToAYNngeXhUA37D3dO" +
+				"T_q6ZKfvj8PfCFMgMjfHOpyeIEpX9IHMwjokeDCgPMr4i9sbB0euZsuU9i8vGc6YV3E6hZQ7zsrR"+
+				"ql4zqmuv9WKWKQL-a8JgwWl1nocqevq9k6e4HZ4g7Z5FU8budcRKQ8lcGxN6yqtdh0ZK2ib-9N0W"+
+				"D4LrwckQoqj4_zWI01FurIj-AJI91775f15EGoIjETuMdixtIbQ1WEZrCBpxhVJXXmgfNoVg7iKn"+
+				"Da7bjjELwFr9CHjpCPg058SW94q57kMI3uISxf2ZC1jMtBudM-0lErTANlKw8y0xq3HwHsZybIkf"+
+				"aYqHywIDAQAB";
+
+
+		String decodedString = new String(Base64.decodeBase64(encodedString.getBytes()));
+		System.out.println("The decoded String is: " + decodedString);
+		
+		
+		X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(decodedString.getBytes());
+		KeyFactory keyFactory;
+		PublicKey pubKey = null;
+		try {
+			keyFactory = KeyFactory.getInstance("RSA");
+			pubKey = keyFactory.generatePublic(pubKeySpec);
+		} catch (NoSuchAlgorithmException e) {
+
+		
+For Private Keys:
+You could still load the keys if necessary, all you need is the modulus and the exponent.

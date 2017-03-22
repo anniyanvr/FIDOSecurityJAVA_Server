@@ -1,0 +1,37 @@
+
+VM Details
+
+
+Expiry Date: 15/12/2016
+
+VM Name:      hj-ctocto4647
+VM Status:     Active
+IP Address:	  10.51.237.214
+Project:   Security_R&D
+Image:  WIN7_ENT_x64
+
+System Specifications:
+Hard disk: 100 GB
+RAM: 4 GB
+VCPUs: 2
+
+How to connect to my VM ?
+1. Go to Start Menu and search for 'Remote Desktop Connection' and click on it. 
+2. Enter your VM IP and click on Connect button. 
+3. A new popup will appear asking for the credential. Enter your Persistent credential to connect to the VM. 
+
+Note: Please login after 30 minutes after VM creation. 
+For further VM provisioning, you can login to FreeBird .
+If you have any query please Raise a Service (Remedy) Request.
+Regards,
+FreeBird
+
+
+[6/16/2016 10:10 AM] Dinesh Rivankar: 
+raise a remedy saying allow access outside psl network  
+he will ask u to give a domain name 
+like test.persistent.co.in
+they will do the rest  
+aamka kai karpak padna 
+
+Domain: fido.persistent.co.in

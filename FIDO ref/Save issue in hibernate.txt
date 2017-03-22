@@ -1,0 +1,4 @@
+10:09:41.149 [http-bio-8080-exec-3] DEBUG org.hibernate.engine.transaction.internal.jdbc.JdbcTransaction - initial autocommit status: false
+10:09:54.838 [http-bio-8080-exec-3] DEBUG org.hibernate.event.internal.AbstractSaveEventListener - Generated identifier: 11123, using strategy: org.hibernate.id.Assigned
+10:10:17.357 [http-bio-8080-exec-3] DEBUG org.hibernate.engine.transaction.spi.AbstractTransactionImpl - rolling back
+10:10:17.357 [http-bio-8080-exec-3] DEBUG org.hibernate.engine.transaction.internal.jdbc.JdbcTransaction - rolled JDBC Connection

@@ -1,0 +1,170 @@
+NOTE: For HTTPS: change http tp https and 8080 to 8443 in all the URLs
+
+A] Allow Push notifications when user installs the app and runs it for the first time.
+URL: http://localhost:8080/fidouaf_test/v1/public/enablePushNotifications
+Method: POST
+
+Input:
+{
+	"deviceid": "0000111111",
+	"devicetoken": "hksdcvkdfjcvnhdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfvcsdfvvvvvvvvvvvvvvvvvvvvvvvvvs"
+}
+
+Output:
+{
+	"deviceDataUpdateStatus": "true/false"
+}
+
+===============================================================================================================================================
+B] RP Reg Request:
+URL: http://localhost:8080/fidouaf_test/v1/public/rpRegRequest
+Method: POST
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"displayName": "Amogh",
+	"email": "amogh_tarcar@persistent.com",
+	"accountId": "11123"
+}
+
+Output:
+{
+  "registrationResponse": "688664"
+}
+
+===============================================================================================================================================
+C] Verify QR code contents after scanning.
+URL: http://localhost:8080/fidouaf_test/v1/public/verifyQRContents
+Method: POST
+
+Input:
+{	
+	"rpDisplayName": "",
+	"displayName": "",
+	"email": "",
+	"otp": "",
+	"accountId": "",
+	"deviceId": ""
+}
+
+Output:
+{	
+	"QRCodeVerification": "true/false"
+}
+
+===============================================================================================================================================
+D] Get Make Credentials Details:
+URL: http://localhost:8080/fidouaf_test/v1/public/getMakeCredentialDetails
+Method: POST
+
+Input:
+{
+	"accountId": "11111222"
+}
+
+Output:
+{	
+	"rpDisplayName": "",
+	"displayName": "",
+	"email": "",
+	"accountID": ""
+}
+
+===============================================================================================================================================
+E] FIDO Reg Response:
+URL: http://localhost:8080/fidouaf_test/v1/public/regResponse
+Method: POST
+
+Input:
+Note: All input will remain same. But the username should be set to deviceId now instead of phone number when calling the GET regRequest API, so that the same is picked up during this API call.
+
+Output:
+As same as before. Username will be deviceId now.
+
+===============================================================================================================================================
+F] Get Registration Response Status
+URL: http://localhost:8080/fidouaf_test/v1/public/regResponseStatus
+Method: POST
+
+Input:
+{	
+	"rpaccountid": "11116"
+}
+
+Output:
+	SUCCESS/FAILURE
+
+===============================================================================================================================================
+G] Send Push notification while login in with FIDO
+URL: http://localhost:8080/fidouaf_test/v1/public/pushNotifyAuthentication
+Method: POST
+
+Input:
+{
+	"accountId": "11116",
+	"rpDisplayName": "PSLBANK"
+}
+
+Output:
+	SUCCESS
+
+===============================================================================================================================================
+H] Get Authentication Response Status
+URL: http://localhost:8080/fidouaf_test/v1/public/authResponseStatus
+Method: POST
+
+Input:
+{
+	"displayName": "Amogh",
+	"accountId": "11116"
+}
+
+Output:
+	SUCCESS/FAILURE
+
+===============================================================================================================================================
+I] Logout
+URL: http://localhost:8080/fidouaf_test/v1/public/dologout/111223  ------> (deviceid)
+Method: GET
+Tables: vendordb, devicedetails
+
+Output:
+{
+	"Message": "User is successfully logged out.../Logout Failed!",
+	"Login Status": "true/false"
+}
+
+===============================================================================================================================================
+J] Send transaction details from RP website
+URL: http://localhost:8080/fidouaf_test/v1/public/sendTransactions
+Method: POST
+
+Input:
+{
+	"accountId": "5774f4d86a325ab04e8851f3",
+	"content": {
+		"amount_transferred": "5000",
+		"username": "Amogh",
+		"to": "LIC Corporation"
+	},
+	"appId": "https://localhost:3000"
+}
+
+Output:
+	SUCCESS
+	
+===============================================================================================================================================	
+F] Process the Push Notification Reply from mobile to return appId and contents:
+URL: http://localhost:8080/fidouaf_test/v1/public/processPushNotificationAck
+
+Input:
+{ 
+	"accountId" :"0000111111"
+}
+
+Output:
+{
+	"appId": "fgfhyut7890897",
+	"content": "Approve Transaction of Rs. 500 from account with username: Amogh to: LIC Corp."
+}

@@ -1,0 +1,15 @@
+Inter App communication APIs for FIDO processes:
+
+NOTE: For HTTPS: change http tp https and 8080 to 8443 in all the URLs
+A] Notify the Server about the user authentication from the PSL Bank App.
+URL: http://localhost:8080/fidouaf_test/v1/public/notifyAppAuthentication
+Method: POST
+
+Input:
+{
+	"accountId": "11116",
+	"rpDisplayName": "PSLBANK"
+}
+
+Output:
+	Provide approval for login attempt by user: Amogh into: PSL BANK app.

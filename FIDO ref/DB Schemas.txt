@@ -1,0 +1,29 @@
+devicedetails: 
+CREATE TABLE devicedetails (deviceid varchar(50) NOT NULL PRIMARY KEY, devicetoken longtext, rpaccountname varchar(50), regstats boolean, publickey longtext, aaid_keyid longtext, rpaccountid varchar(30), phonenumber varchar(20));
+
+vendordb:
+CREATE TABLE vendordb (accountid varchar(30) NOT NULL PRIMARY KEY, displayname varchar(20) NOT NULL, rpdisplayname varchar(30) NOT NULL, phonenumber varchar(20) NOT NULL, email varchar(80), otp varchar(10), vendor_regstats boolean, otp_creationdate datetime, FOREIGN KEY (phonenumber) REFERENCES devicedetails (phonenumber));
+
+registrationdb:
+CREATE TABLE registrationdb (username varchar(20) NOT NULL PRIMARY KEY, regstats boolean, publickey longtext, otp varchar(10), loginstats boolean, vendordetails longtext, aaid_keyid longtext, deviceid varchar(50), otp_creationdate datetime, devicetoken longtext);
+
+transactiondb:
+CREATE TABLE transactiondb (accountid varchar(30) NOT NULL PRIMARY KEY, contents longtext NOT NULL , appid longtext NOT NULL);
+
+
+
+************************************************************************************************************************************************
+
+In future if new table is added and needs to point to any of the above tables columns as foreign key, do the foll:
+1) add index to the column whose key you will be referencing in new table as forrign key
+	alter table devicedetails add index accnt_id (rpaccountid);
+2) alter the new table created to add the foreign key constraint:
+	alter table transactiondb add foreign key(accountid) references devicedetails(rpaccountid);
+	
+In future to drop the primary key on a column which is also a foreign key, do the foll:
+1) Drop the foreign key constratint on the column:
+	alter table transactiondb drop foreign key transactiondb_ibfk_1
+2) Drop the primary key constraint next:
+	ALTER TABLE transactiondb DROP PRIMARY KEY;
+3) re-add the foreign ley constraint if needed:
+	alter table transactiondb add foreign key(accountid) references devicedetails(rpaccountid);

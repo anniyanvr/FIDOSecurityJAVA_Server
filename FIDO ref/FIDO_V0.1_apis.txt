@@ -1,0 +1,138 @@
+NOTE: For HTTPS: change http tp https and 8080 to 8443 in all the URLs
+
+A] Login Request:
+URL: http://localhost:8080/fidouaf_test/v1/public/loginRequest
+
+Input:
+{ 
+	"username" :""
+}
+
+Output:
+{
+	"registrationResponse": "<otp>"
+}
+
+
+===============================================================================================================================================
+B} Login Response:
+URL: http://localhost:8080/fidouaf_test/v1/public/loginResponse
+
+Input:
+{ 
+	"username" :"",
+	"otp": ""
+}
+
+Output:
+{
+	"Login Status": "true/false",
+	"Registration Status": "true/false"
+}
+	
+	
+===============================================================================================================================================
+C] RP Reg Request:
+URL: http://localhost:8080/fidouaf_test/v1/public/rpRegRequest
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"displayName": "Amogh",
+	"email": "amogh_tarcar@persistent.com",
+	"accountId": "11123",
+	"phoneNumber": "9923411825"
+}
+
+Output:
+{
+  "registrationResponse": "688664"
+}
+
+
+===============================================================================================================================================
+D] RP Reg Response:
+URL: http://localhost:8080/fidouaf_test/v1/public/rpRegResponse
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"displayName": "Amogh",
+	"otp": "<otp>"
+}
+
+Output:
+{
+	"Vendor Name" : "<vendor Name>",
+	"Registration Status": "true/false"
+}
+
+
+===============================================================================================================================================
+E] Get Make Credentials Details:
+URL: http://localhost:8080/fidouaf_test/v1/public/getMakeCredentialDetails
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"phoneNumber": "9923411825"
+}
+
+Output:
+{	
+	"rpDisplayName": "",
+	"displayName": "",
+	"phoneNumber": "",
+	"Email": "",
+	"AccountID": ""
+}
+
+
+===============================================================================================================================================
+F] Grant Push Notifications
+URL: http://localhost:8080/fidouaf_test/v1/public/grantPushNotifications
+
+Input:
+{
+	"username": "",
+	"deviceToken": ""
+}
+
+Output:
+{
+	"username": "",
+	"deviceTokenUpdateStatus": ""
+}
+
+
+===============================================================================================================================================
+G] Use PSL FIDO server
+URL: http://localhost:8080/fidouaf_test/v1/public/fidoServerRequest
+
+Input:
+{	
+	"rpDisplayName": "",
+	"displayName": ""
+}
+
+Output:
+{
+	"Vendor Name": "",
+	"Registration Status": ""
+}
+
+
+===============================================================================================================================================
+H] LOGOUT
+URL: http://localhost:8080/fidouaf_test/v1/public/dologout
+
+Input:
+{	
+	"phoneNumber": "9923411825"
+}
+
+Output:
+{
+	"Message": "",
+	"Login Status": ""
+}

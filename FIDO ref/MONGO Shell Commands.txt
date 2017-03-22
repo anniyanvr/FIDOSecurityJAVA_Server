@@ -1,0 +1,17 @@
+db.users.find();  --- find all records in table
+db.users.find( { username: "jasferna" } ); --- find a record with username=jasferna
+
+show dbs --- shows all databases
+use mydb -- switches to use a db
+show tables --- shows all tables in database
+
+to drop a database, run below commands
+- show dbs
+- use mydb
+- db.dropDatabase();
+
+
+to remove from db
+- show dbs
+- use mydb
+- db.users.remove( { vendorname: "HDFC" } );

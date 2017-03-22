@@ -1,0 +1,85 @@
+Basically three things needed for the POC
+1. java server 
+2. Android app 
+3. ios app 
+
+
+RSA encryption/decryption is very imp in this POC
+
+
+To give you a head start.. check RSA crypto in Java
+we need RSA key generation,  
+ecryption/decryption
+& RSA sign and verification 
+The API's will be REST api's
+working on https
+
+
+setting up https connection in java using tomcat via eclipse IDE
+
+http://stackoverflow.com/questions/951890/eclipse-wtp-how-do-i-enable-ssl-on-tomcat
+https://dzone.com/articles/setting-ssl-tomcat-5-minutes
+https://www.youtube.com/watch?v=h-yKgQtpbco
+
+10.244.36.118 --------> My IP
+
+
+
+[2/12/2016 4:17 PM] Sudhakar Shenoy: 
+package org.ebayopensource.fidouaf.res
+[2/12/2016 4:18 PM] Sudhakar Shenoy: 
+go to this resource file
+[2/12/2016 4:18 PM] Sudhakar Shenoy: 
+it will have all the methods / resources offered by the server
+[2/12/2016 4:19 PM] Sudhakar Shenoy: 
+so the Android / iOS client will call these APIs to make different requests
+registration request, deregistration, autherization req etc
+[2/12/2016 4:19 PM] Sudhakar Shenoy: 
+so if u trace the functions call, u will get the code flow
+[2/12/2016 4:20 PM] Sudhakar Shenoy: 
+http://BHL05235:8080/fidouaf_test/hello/hi if u invoke this API, u will get some output
+[2/12/2016 4:20 PM] Sudhakar Shenoy: 
+GET http://BHL05235:8080/fidouaf_test/hello/hi
+[2/12/2016 4:20 PM] Sudhakar Shenoy: 
+u can use postman to test this
+[2/12/2016 4:21 PM] Sudhakar Shenoy: 
+yes, thats right.
+[2/12/2016 4:21 PM] Sudhakar Shenoy: 
+and if we dont find any android developer, u will be android dev as well :)
+[2/12/2016 4:22 PM] Sudhakar Shenoy: 
+yes, postman is a google tool that u can use to test rest apis
+or u can use poster (if i get it right) from mozilla firefox
+first thing is get the server running on ur system
+i mean, the UAF server running
+[2/12/2016 4:24 PM] Sudhakar Shenoy: 
+import the ebay uaf code in ur eclipse and get that working
+
+
+
+D:\FIDO Docs\UAF-master\UAF-master\fidouaf\src\main\java\org\ebayopensource\fidouaf\res ---- contains java server code
+
+fido-uaf-core - UAF protocol implementation 
+fidouaf - UAF server, a Jersey service application for demoing UAF protocol im 
+
+
+
+
+
+[3/1/2016 11:14 AM] Amogh Tarcar: 
+currently using @Path("/public/regRequest/{username}")
+ 
+[3/1/2016 11:15 AM] Jasmira Fernandes: 
+yes, so for demo we have to make this flow work ryt?
+[3/1/2016 11:15 AM] Jasmira Fernandes: 
+and sumthing more?
+[3/1/2016 11:16 AM] Amogh Tarcar: 
+this will be the starting point from app. 
+[3/1/2016 11:17 AM] Amogh Tarcar: 
+after that see what the server is doing with the request.
+[3/1/2016 11:17 AM] Amogh Tarcar: 
+after that android device will send a POST, with signed data
+[3/1/2016 11:17 AM] Amogh Tarcar: 
+this signed data should be first verified. 
+[3/1/2016 11:18 AM] Amogh Tarcar: 
+then android device generated public key contained in the signed data should be extracted and saved on the server side
+

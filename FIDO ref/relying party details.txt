@@ -1,0 +1,17 @@
+Relying party:
+
+[4/19/2016 11:58 AM] Sudhakar Shenoy: 
+Relying party will be webserver, who is having normal user login & other operations
+so your login API be the relying party
+you can create a different website and move the login api there
+on fido server, u will need to store mapping of relying party along with username & public key as ur storing now
+
+
+node js:
+https://www.youtube.com/watch?v=p-x6WdwaJco
+https://github.com/matthoiland/restful-api-demo
+
+
+twilio api for post:
+https://api.twilio.com/2010-04-01/Accounts/AC7a6d1b6780a14ea1ece4eb89362c57be/Messages.json
+

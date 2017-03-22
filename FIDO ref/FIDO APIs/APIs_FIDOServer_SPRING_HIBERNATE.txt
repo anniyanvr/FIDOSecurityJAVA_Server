@@ -1,0 +1,263 @@
+NOTE: For HTTPS: change http tp https and 8080 to 8443 in all the URLs
+
+A] Allow Push notifications when user installs the app and runs it for the first time.
+URL: http://localhost:8080/fidouaf_test/v1/public/enablePushNotifications
+Method: POST
+
+Input:
+{
+	"deviceid": "0000111111",
+	"devicetoken": "hksdcvkdfjcvnhdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfvcsdfvvvvvvvvvvvvvvvvvvvvvvvvvs"
+}
+
+Output:
+{
+	"deviceDataUpdateStatus": true/false
+}
+
+===============================================================================================================================================
+B] RP Registration Request:
+URL: http://localhost:8080/fidouaf_test/v1/public/rpRegRequest
+Method: POST
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"displayName": "Jasmira",
+	"email": "jasmira_fernandes@persistent.co.in",
+	"accountId": 11123
+}
+
+Output:
+{
+  "registrationResponse": "688664"
+}
+
+===============================================================================================================================================
+C] Verify QR code contents after scanning.
+URL: http://localhost:8080/fidouaf_test/v1/public/verifyQRContents
+Method: POST
+
+Input:
+{	
+	"rpDisplayName": "HDFC",
+	"displayName": "Jasmira",
+	"email": "jasmira_fernandes@persistent.co.in",
+	"otp": "123456",
+	"accountId": 11123,
+	"deviceId": "qwertty"
+}
+
+Output:
+{	
+	"QRCodeVerification": true/false
+}
+
+===============================================================================================================================================
+D] Get Make Credentials Details:
+URL: http://localhost:8080/fidouaf_test/v1/public/getMakeCredentialDetails
+Method: POST
+
+Input:
+{
+	"accountId": 11222
+}
+
+Output:
+{	
+	"rpDisplayName": "HDFC",
+	"displayName": "Jasmira",
+	"email": "jasmira_fernandes@persistent.co.in",
+	"accountID": 11222
+}
+
+===============================================================================================================================================
+E] FIDO Reg Response:
+URL: http://localhost:8080/fidouaf_test/v1/public/regResponse
+Method: POST
+
+Input:
+Note: All input will remain same. But the username should be set to accountId now instead of phone number when calling the GET regRequest API, so that the same is picked up during this API call.
+
+Output:
+As same as before. Username will be accountId now.
+
+===============================================================================================================================================
+F] Get Registration Response Status
+URL: http://localhost:8080/fidouaf_test/v1/public/regResponseStatus?rpaccountid=11116
+Method: GET
+
+Output:
+	SUCCESS/FAILURE
+
+===============================================================================================================================================
+G] Send Push notification while login in with FIDO
+URL: http://localhost:8080/fidouaf_test/v1/public/pushNotifyAuthentication
+Method: POST
+
+Input:
+{
+	"accountId": 11116,
+	"rpDisplayName": "PSLBANK"
+}
+
+Output:
+	SUCCESS
+
+===============================================================================================================================================
+H] Get Authentication Response Status
+URL: http://localhost:8080/fidouaf_test/v1/public/getAuthResponseStatus?rpaccountid=11116
+Method: GET
+
+Output:
+	SUCCESS/FAILURE
+
+===============================================================================================================================================
+I] Logout
+URL: http://localhost:8080/fidouaf_test/v1/public/dologout
+Method: GET
+
+Output:
+{
+	"message": "User is successfully logged out..."     OR     "Logout Failed!",
+	"status": true/false
+}
+
+===============================================================================================================================================
+J] Send transaction details from RP website
+URL: http://localhost:8080/fidouaf_test/v1/public/sendTransactions
+Method: POST
+
+Input:
+{
+	"accountId": 11123,
+	"amount_transferred": "5000",
+	"username": "Jasmira",
+	"to": "LIC Corporation",
+	"appId": "https://localhost:3000"
+}
+
+Output:
+	SUCCESS
+	
+===============================================================================================================================================	
+F] Process the Push Notification Reply from mobile to return appId and contents:
+URL: http://localhost:8080/fidouaf_test/v1/public/processPushNotificationAck
+Method: POST
+
+Input:
+{ 
+	"accountId": 00011
+}
+
+Output:
+{
+	"appId": "fgfhyut7890897",
+	"content": "Approve Transaction of Rs. 500 from account with username: Jasmira to: LIC Corporation"
+}
+
+===============================================================================================================================================	
+G] Clear Last Authentication Response
+URL: http://localhost:8080/fidouaf_test/v1/public/clearAuthResponse
+Method: GET
+
+Output:
+	SUCCESS
+
+===============================================================================================================================================
+H] FIDO Deregistration request
+URL: http://localhost:8080/fidouaf_test/v1/public/deregRequest
+Method: POST
+
+Input:
+[{
+	"header": {
+		"op": "Dereg",
+		"upv": {
+			"major": 1,
+			"minor": 0
+		},
+		"appID": "android:apk-key-hash:bE0f1WtRJrZv/C0y9CM73bAUqiI"
+	},
+	"authenticators": [{
+		"aaid": "TCH0#0001",
+		"keyID": "hdkvsdvhdskvdsvhdksjvndsvhsdovsd"
+	}]
+}]
+
+Output:
+	SUCCESS     OR     Failure: Problem in deleting record from local DB     OR     Failure: problem processing deregistration request
+
+===============================================================================================================================================
+I] FIDO Authentication Response:
+URL: http://localhost:8080/fidouaf_test/v1/public/authResponse
+Method: POST
+
+Input:
+Note: All input will remain same. 
+
+Output:
+As same as before.
+
+===============================================================================================================================================
+J] APP Registration Request:
+URL: http://localhost:8080/fidouaf_test/v1/public/appRegRequest
+Method: POST
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"displayName": "Jasmira",
+	"email": "jasmira_fernandes@persistent.co.in",
+	"accountId": 11123
+}
+
+Output:
+{
+  "registrationResponse": "688664"
+}
+
+===============================================================================================================================================
+K] Notify Authenticators Enforced on user during registration to FIDO server:
+URL: http://localhost:8080/fidouaf_test/v1/public/notifyAuthenticators
+Method: POST
+
+Input:
+{
+	"rpaccountId": 11123,
+	"context": "Home",
+	"aaids": "['TCH0#001', 'PIN0#0001']"
+}
+
+Output:
+	NOTIFIED
+
+===============================================================================================================================================
+L] Get Signed context for each user:
+URL: http://localhost:8080/fidouaf_test/v1/public/getSignedContext
+Method: POST
+
+Input:
+{
+	"rpaccountId": 11123
+}
+
+Output:
+{
+  "signedContext": "fsdfwelfnldvnlfwrvfrvgfrvnjwlhvfwlvnlwlvlfdwfwdfmvlfnvl"
+}
+
+===============================================================================================================================================
+M] Notify FIDO server about user trying to authenticate to app/website using FIDO Authentication
+URL: http://localhost:8080/fidouaf_test/v1/public/notifyAppAuthentication
+Method: POST
+
+Input:
+{
+	"accountId": 11123
+}
+
+Output:
+	"Provide approval for login attempt by user: Jasmira into: PSLBANK app."
+
+===============================================================================================================================================

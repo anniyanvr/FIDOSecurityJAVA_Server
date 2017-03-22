@@ -1,0 +1,264 @@
+NOTE: For HTTPS: change http tp https and 8080 to 8443 in all the URLs
+
+A] Login Request:
+URL: http://localhost:8080/fidouaf_test/v1/public/loginRequest
+Method: POST
+Table: registrationdb
+
+Input:
+{ 
+	"username" :"9923411825"
+}
+
+Output:
+{
+	"registrationResponse": "<otp>"
+}
+
+
+===============================================================================================================================================
+B] Login Response:
+URL: http://localhost:8080/fidouaf_test/v1/public/loginResponse
+Method: POST
+Table: registrationdb
+
+Input:
+{ 
+	"username" :"9923411825",
+	"otp": "766878"
+}
+
+Output:
+{
+	"Login Status": "true/false",
+	"Registration Status": "true/false"
+}
+	
+	
+===============================================================================================================================================
+C] RP Reg Request:
+URL: http://localhost:8080/fidouaf_test/v1/public/rpRegRequest
+Method: POST
+Table: vendordb
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"displayName": "Amogh",
+	"email": "amogh_tarcar@persistent.com",
+	"accountId": "11123",
+	"phoneNumber": "9923411825"
+}
+
+Output:
+{
+  "registrationResponse": "688664"
+}
+
+
+===============================================================================================================================================
+D] RP Reg Response:
+URL: http://localhost:8080/fidouaf_test/v1/public/rpRegResponse
+Method: POST
+Tables: vendordb, registrationdb
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"phoneNumber": "9923411825",
+	"otp": "774534"
+}
+
+Output:
+{
+	"Vendor Name" : "HDFC",
+	"Registration Status": "true/false"
+}
+
+
+===============================================================================================================================================
+E] Get Make Credentials Details:
+URL: http://localhost:8080/fidouaf_test/v1/public/getMakeCredentialDetails
+Method: POST
+Table: vendordb
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"phoneNumber": "9923411825"
+}
+
+Output:
+{	
+	"rpDisplayName": "",
+	"displayName": "",
+	"phoneNumber": "",
+	"Email": "",
+	"AccountID": ""
+}
+
+
+===============================================================================================================================================
+F] Grant Push Notifications
+URL: http://localhost:8080/fidouaf_test/v1/public/grantPushNotifications
+Method: POST
+Table: registrationdb
+
+Input:
+{
+	"username": "",
+	"deviceToken": ""
+}
+
+Output:
+{
+	"username": "",
+	"deviceTokenUpdateStatus": "true/false"
+}
+
+===============================================================================================================================================
+G] Logout
+URL: http://localhost:8080/fidouaf_test/v1/public/dologout
+Method: POST
+Tables: vendordb, devicedetails
+
+Input:
+{	
+	"phoneNumber": "9923411825"
+}
+
+Output:
+{
+	"Message": "User is successfully logged out.../Phone Number is incorrect. Logout Failed!",
+	"Login Status": "true/false"
+}
+
+===============================================================================================================================================
+H] Get Registration Response Status
+URL: http://localhost:8080/fidouaf_test/v1/public/regResponseStatus
+Method: POST
+Table: devicedetails
+
+Input:
+{	
+	"phoneNumber": "9923411825"
+}
+
+Output:
+	SUCCESS/FAILURE
+	
+===============================================================================================================================================
+I] Get Authentication Response Status
+URL: http://localhost:8080/fidouaf_test/v1/public/authResponseStatus
+Method: POST
+Table: No DB involved
+
+Input:
+{
+	"username": "9923411825"
+}
+
+Output:
+	SUCCESS/FAILURE
+	
+===============================================================================================================================================
+J] Send Push notification while login in with FIDO
+URL: http://localhost:8080/fidouaf_test/v1/public/pushNotifyAuthentication
+Method: POST
+Tables: devicedetails, vendordb
+
+Input:
+{
+	"phoneNumber": "9923411825",
+	"rpDisplayName": "PSLBANK"
+}
+
+Output:
+	Success
+	
+===============================================================================================================================================
+K] Clear Last (Latest) Authentication Response fired
+URL: http://localhost:8080/fidouaf_test/v1/public/clearAuthResponse
+Method: GET
+Tables: No DB involved
+
+Output:
+	SUCCESS
+
+===============================================================================================================================================
+L] Allow Push notifications when user installs the app and runs it for the first time.
+URL: http://localhost:8080/fidouaf_test/v1/public/enablePushNotifications
+Method: POST
+Table: devicedetails
+
+Input:
+{
+	"deviceid": "0000111111",
+	"devicetoken": "hksdcvkdfjcvnhdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfvcsdfvvvvvvvvvvvvvvvvvvvvvvvvvs",
+	"phoneNumber": "9923411825"
+}
+
+Output:
+{
+	"deviceDataUpdateStatus": "true/false"
+}
+
+===============================================================================================================================================
+M] Verify QR code contents after scanning.
+URL: http://localhost:8080/fidouaf_test/v1/public/verifyQRContents
+Method: POST
+Tables: vendordb, devicedetails
+
+Input:
+{	
+	"rpDisplayName": "",
+	"displayName": "",
+	"email": "",
+	"otp": "",
+	"accountId": "",
+	"deviceId": ""
+}
+
+Output:
+{	
+	"QRCodeVerification": "true/false"
+}
+
+===============================================================================================================================================
+N] Send transaction contents from RP to store in DB
+URL: http://localhost:8080/fidouaf_test/v1/public/sendTransactions
+Method: POST
+Tables: transactiondb, devicedetails
+
+Input:
+{
+	"accountId": "5774f4d86a325ab04e8851f3",
+	"content": {
+		"amount_transferred": "5000",
+		"username": "Amogh",
+		"to": "LIC Corporation"
+	},
+	"appId": "https://localhost:3000"
+}
+
+Output:
+	SUCCESS
+
+===============================================================================================================================================
+O] Acknowledge the reply for Transaction alerting - Push Notification from mobile:
+URL: http://localhost:8080/fidouaf_test/v1/public/processPushNotificationAck
+Method: POST
+Table: transactiondb
+
+Input:
+{ 
+	"rpaccountid" :"0000111111"
+}
+
+Output:
+{
+	"appId": "fgfhyut7890897",
+	"content": "Approve Transaction of Rs. 500 from account with username: Amogh to: LIC Corp."
+}
+
+===============================================================================================================================================

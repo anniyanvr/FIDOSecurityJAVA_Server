@@ -1,0 +1,120 @@
+NOTE: To toggle between http and https change http (post: 8080) to https (port: 8443) and vice versa in all the URLs
+
+A] Login Request:
+URL: http://10.51.236.188:8080/fidouaf_test/v1/public/loginRequest
+
+Input:
+{ 
+	"username" :"<proper phone number to be sent>"
+}
+
+Output:
+{
+	"registrationResponse": "<otp>"
+}
+
+
+===============================================================================================================================================
+B} Login Response:
+URL: http://10.51.236.188:8080/fidouaf_test/v1/public/loginResponse
+
+Input:
+{ 
+	"username" :"<phone number sent in above API>",
+	"otp": "<otp generated as response from above API>"
+}
+
+Output:
+{
+	"Login Status": "true/false",
+	"Registration Status": "true/false"
+}
+	
+	
+===============================================================================================================================================
+C] RP Reg Request:
+URL: http://10.51.236.188:8080/fidouaf_test/v1/public/rpRegRequest
+
+Input:
+{
+	"rpDisplayName": "<Ex. HDFC>",
+	"displayName": "<Ex. Amogh>",
+	"email": "<Ex. amogh_tarcar@persistent.com>",
+	"accountId": "<Ex. 11123>",
+	"phoneNumber": "<Ex. 9923411825>"
+}
+
+Output:
+{
+  "registrationResponse": "<otp>"
+}
+
+
+===============================================================================================================================================
+D] RP Reg Response:
+URL: http://10.51.236.188:8080/fidouaf_test/v1/public/rpRegResponse
+
+Input:
+{
+	"rpDisplayName": "<Ex. HDFC>",
+	"displayName": "<Ex. Amogh>",
+	"otp": "<otp>"
+}
+
+Output:
+{
+	"Vendor Name" : "<vendor Name>",
+	"Registration Status": "true/false"
+}
+
+
+===============================================================================================================================================
+E] Get Make Credentials Details:
+URL: http://10.51.236.188:8080/fidouaf_test/v1/public/getMakeCredentialDetails
+
+Input:
+{
+	"rpDisplayName": "<Ex. HDFC>",
+	"phoneNumber": "<Ex. 9923411825>"
+}
+
+Output:
+{	
+	"rpDisplayName": "",
+	"displayName": "",
+	"phoneNumber": "",
+	"Email": "",
+	"AccountID": ""
+}
+
+
+===============================================================================================================================================
+F] Grant Push Notifications
+URL: http://10.51.236.188:8080/fidouaf_test/v1/public/grantPushNotifications
+
+Input:
+{
+	"username": "<proper phone number>",
+	"deviceToken": "<device token of apple device>"
+}
+
+Output:
+{
+	"username": "<phone number entered>",
+	"deviceTokenUpdateStatus": "true/false"
+}
+
+===============================================================================================================================================
+H] LOGOUT
+URL: http://10.51.236.188:8080/fidouaf_test/v1/public/dologout
+
+Input:
+{	
+	"username": "<Ex. 9923411825>"
+}
+
+Output:
+{
+	"Message": "Successfully logged out",
+	"Login Status": "true/false"
+}

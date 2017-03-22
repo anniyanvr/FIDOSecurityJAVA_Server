@@ -1,0 +1,18 @@
+Body: 
+{
+	"notification": {
+		"title": "Approval",
+		"text": "Testing...."
+	},
+	"to": "dOn_wlLmIAM:APA91bEMccBst20vlf0Rjw6NFkmlay1kz7unITDCakIMZxTQoWtZ0_7_YqsN-RA5HQNoU8NzVv5jrcbKTTOU945FbydYIstXwoyHZXsm_Jw7X3jrbaGQ-6oz9_CgmkATGMKrRybGJKmM"
+}
+
+
+TYPE OF REQUEST: POST
+URL: https://fcm.googleapis.com/fcm/send
+
+
+Headers: 
+ContentType: Application/json 
+Authorization: key=AIzaSyAKxN6RAkSXjvpLK2j8zASsKo6Yub_wSH8
+

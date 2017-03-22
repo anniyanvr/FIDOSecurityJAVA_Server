@@ -1,0 +1,57 @@
+mysql> desc devicedetails;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| deviceid         | varchar(50) | NO   | PRI | NULL    |       |
+| devicetoken      | longtext    | NO   |     | NULL    |       |
+| rpaccountname    | varchar(50) | YES  |     | NULL    |       |
+| regstats         | tinyint(1)  | YES  |     | NULL    |       |
+| rpaccountid      | varchar(30) | YES  | MUL | NULL    |       |
+| auth_in_progress | tinyint(1)  | YES  |     | NULL    |       |
+| authstats        | tinyint(1)  | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+
+
+mysql> desc key_info;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| deviceid    | varchar(50) | NO   | MUL | NULL    |       |
+| rpaccountid | varchar(30) | YES  | MUL | NULL    |       |
+| publickey   | longtext    | YES  |     | NULL    |       |
+| aaid_keyid  | longtext    | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+
+mysql> desc vendordb;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| accountid        | varchar(30) | NO   | PRI | NULL    |       |
+| displayname      | varchar(20) | NO   |     | NULL    |       |
+| rpdisplayname    | varchar(30) | NO   |     | NULL    |       |
+| email            | varchar(80) | YES  |     | NULL    |       |
+| otp              | varchar(10) | YES  |     | NULL    |       |
+| vendor_regstats  | tinyint(1)  | YES  |     | NULL    |       |
+| otp_creationdate | datetime    | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+
+
+mysql> desc transactiondb;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| accountid | varchar(30) | YES  | MUL | NULL    |       |
+| contents  | longtext    | YES  |     | NULL    |       |
+| appid     | longtext    | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+
+FEW QUERIES:
+--> create table devicedetails (deviceid varchar(50) NOT NULL PRIMARY KEY, devicetoken longtext NOT NULL, rpaccountname varchar(50), regstats boolean, rpaccountid varchar(30), auth_in_progress boolean, authstats boolean);
+
+--> alter table devicedetails add foreign key (rpaccountid) references vendordb(accountid);
+
+--> create table key_info (deviceid varchar(50) NOT NULL, rpaccountid varchar(30), publickey longtext, aaid_keyid longtext, FOREIGN KEY (deviceid) REFERENCES devicedetails(deviceid), FOREIGN KEY (rpaccountid) REFERENCES devicedetails(rpaccountid));
+
+--> create table transactiondb (accountid varchar(30), contents longtext, appid longtext, FOREIGN KEY (accountid) REFERENCES devicedetails(rpaccountid));

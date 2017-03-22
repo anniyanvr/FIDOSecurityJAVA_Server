@@ -1,0 +1,5 @@
+Node Js:
+
+To Setup proxy in node
+npm config set proxy http://gaproxy.persistent.co.in:8080
+npm config set https-proxy http://gaproxy.persistent.co.in:8080

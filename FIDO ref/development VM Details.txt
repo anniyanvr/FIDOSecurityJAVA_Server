@@ -1,0 +1,18 @@
+VM Details
+
+Expiry Date: 28/11/2016
+
+VM Details:
+VM Name:    hj-ctocto4074
+VM Status:	  Active
+IP Address:	 10.51.236.188
+Project: Security_R&D
+Image: WIN7_ENT_x64
+
+System Specifications:
+Hard disk: 100 GB
+RAM: 4 GB
+VCPUs: 2
+
+
+GCM ports open remedy: REQ000000689196 

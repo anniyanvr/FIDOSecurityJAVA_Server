@@ -1,0 +1,105 @@
+NOTE: For HTTPS: change http tp https and 8080 to 8443 in all the URLs
+A] On App install, Accept Push Notifications
+URL: http://localhost:8080/fidouaf_test/v1/public/enablePushNotifications
+
+Input:
+{
+	"deviceid": "0000111111",
+	"devicetoken": "hksdcvkdfjcvnhdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfvcsdfvvvvvvvvvvvvvvvvvvvvvvvvvs",
+	"phoneNumber": "9923411825"
+}
+
+Output:
+{
+	"deviceDataUpdateStatus": "true/false"
+}
+
+===============================================================================================================================================
+B] RP Reg Request:
+URL: http://localhost:8080/fidouaf_test/v1/public/rpRegRequest
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"displayName": "Amogh",
+	"email": "amogh_tarcar@persistent.com",
+	"accountId": "11123",
+	"phoneNumber": "9923411825"
+}
+
+Output:
+{
+  "registrationResponse": "688664"
+}
+
+===============================================================================================================================================
+C] Get Make Credentials Details, to get more info of RP on mobile device:
+URL: http://localhost:8080/fidouaf_test/v1/public/getMakeCredentialDetails
+
+Input:
+{
+	"rpDisplayName": "HDFC",
+	"phoneNumber": "9923411825"
+}
+
+Output:
+{	
+	"rpDisplayName": "",
+	"displayName": "",
+	"phoneNumber": "",
+	"Email": "",
+	"AccountID": ""
+}
+
+===============================================================================================================================================
+D] Verify QR contents:
+URL: http://localhost:8080/fidouaf_test/v1/public/verifyQRContents
+
+Input:
+{	
+	"rpDisplayName": "",
+	"displayName": "",
+	"email": "",
+	"otp": "",
+	"accountId": "",
+	"deviceId": ""
+}
+
+Output:
+{	
+	"QRCodeVerification": "true/false"
+}
+
+===============================================================================================================================================
+E] Send Transaction Details from RP to Server:
+URL: http://localhost:8080/fidouaf_test/v1/public/sendTransactions
+
+Input:
+{
+	"accountId": "5774f4d86a325ab04e8851f3",
+	"content": {
+		"amount_transferred": "5000",
+		"username": "Amogh",
+		"to": "LIC Corporation"
+	},
+	"appId": "https://localhost:3000"
+}
+
+Output:
+	SUCCESS
+
+===============================================================================================================================================
+F] Process the Push Notification Reply from mobile to return appId and contents:
+URL: http://localhost:8080/fidouaf_test/v1/public/processPushNotificationAck
+
+Input:
+{ 
+	"rpaccountid" :"0000111111"
+}
+
+Output:
+{
+	"appId": "fgfhyut7890897",
+	"content": "Approve Transaction of Rs. 500 from account with username: Amogh to: LIC Corp."
+}
+	

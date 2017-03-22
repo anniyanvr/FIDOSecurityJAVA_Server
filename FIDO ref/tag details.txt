@@ -1,0 +1,51 @@
+Tags for registration:
+
+[3/4/2016 3:09 PM] Amogh Tarcar: 
+TAG_UAFV1_REG_ASSERTION
+[3/4/2016 3:09 PM] Amogh Tarcar: 
+this is the first tag
+[3/4/2016 3:09 PM] Amogh Tarcar: 
+then its has two important tags
+[3/4/2016 3:09 PM] Amogh Tarcar: 
+TAG_UAFV1_KRD
+and TAG_ATTESTATION_BASIC_FULL
+
+
+[3/9/2016 3:08 PM] Amogh Tarcar: 
+Verify function needs three things 
+1. data
+2. signature
+3. public key 
+
+it decodes the signature using public key.  
+this decoded data is then compared with the data provided  
+and it checks if that matched
+while signing the data needs to be of specific length. which depends on the algorithm used.
+the same algorithm must be specified while verifying 
+
+
+[3/16/2016 3:03 PM] Amogh Tarcar: 
+hi 
+[3/16/2016 3:03 PM] Amogh Tarcar: 
+do one thing 
+[3/16/2016 3:03 PM] Amogh Tarcar: 
+use openssl and generate the keys you can work with 
+[3/16/2016 3:03 PM] Amogh Tarcar: 
+Pass those keys to me, 
+[3/16/2016 3:04 PM] Amogh Tarcar: 
+the key i exported is PKCS12 , that is P12 file 
+[3/16/2016 3:04 PM] Amogh Tarcar: 
+i am importing P12 file. 
+[3/16/2016 3:05 PM] Jasmira Fernandes: 
+this open ssl, is it a separate tool or command line tool? do u have any site which shows how to generate thos keys?
+also will i be able to get PKCS8 formatted keys?
+[3/16/2016 3:11 PM] Amogh Tarcar: 
+its command tool. Check this link 
+[3/16/2016 3:11 PM] Amogh Tarcar: 
+http://www.akadia.com/services/ssh_test_certificate.html 
+[3/16/2016 3:11 PM] Amogh Tarcar: 
+PKCS12 was standard used for private keys
+[3/16/2016 3:11 PM] Amogh Tarcar: 
+its more robust
+
+

@@ -1,0 +1,20 @@
+Android related important sites
+
+
+Error queries:
+http://stackoverflow.com/questions/19338270/eclipse-android-emulator-not-starting
+http://stackoverflow.com/questions/32628518/android-emulator-launched-but-not-opening/32629822#32629822
+http://www.reading.ac.uk/web/files/futurelearn/begin-programming-faq.pdf
+
+
+Development: 
+http://stackoverflow.com/questions/23318109/is-it-possible-to-use-java-8-for-android-development
+http://www.tutorialspoint.com/android/android_hello_world_example.htm
+
+
+Gradle:
+https://spring.io/guides/gs/gradle-android/
+http://www.vogella.com/tutorials/EclipseGradle/article.html
+http://www.javacodegeeks.com/2013/04/how-to-install-gradle-2.html
+
+My Android studio SDK Location: C:\Users\nitin_desai\AppData\Local\Android\sdk

@@ -1,0 +1,68 @@
+important links:
+
+signing and verifying data:
+http://stackoverflow.com/questions/3151407/signature-verify-always-returns-false
+https://docs.oracle.com/javase/tutorial/security/apisign/
+https://docs.oracle.com/javase/tutorial/security/apisign/step4.html
+https://docs.oracle.com/javase/tutorial/security/apisign/step3.html
+https://docs.oracle.com/javase/tutorial/security/apisign/step3.html
+
+Load keys:
+http://stackoverflow.com/questions/11410770/load-rsa-public-key-from-file
+
+Open SSL generating keys:
+https://rietta.com/blog/2012/01/27/openssl-generating-rsa-key-from-command/
+
+X509 key code spec:
+http://developer.android.com/reference/java/security/spec/X509EncodedKeySpec.html
+https://docs.oracle.com/javase/7/docs/api/java/security/spec/KeySpec.html
+
+SHA256withRSA:
+http://stackoverflow.com/questions/21018355/sha256withrsa-what-does-it-do-and-in-what-order
+
+Generating digital signature:
+https://docs.oracle.com/javase/tutorial/security/apisign/gensig.html
+
+different FIDO supported Algos:
+https://fidoalliance.org/specs/fido-uaf-v1.0-ps-20141208/fido-uaf-reg-v1.0-ps-20141208.html#tags-used-for-crypto-algorithms-and-types
+
+Web API for accessing FIDO:
+https://www.w3.org/Submission/2015/SUBM-fido-web-api-20151120/
+
+Bouncy Castle:
+http://www.itcsolutions.eu/2011/08/22/how-to-use-bouncy-castle-cryptographic-api-in-netbeans-or-eclipse-for-java-jse-projects/
+http://www.bouncycastle.org/latest_releases.html
+
+get keys online:
+http://travistidwell.com/jsencrypt/demo/
+
+generate hash with sha256 online:
+http://www.xorbin.com/tools/sha256-hash-calculator
+
+Open SSL Keys:
+http://www.akadia.com/services/ssh_test_certificate.html 
+
+sha 256 hash calculator: 
+http://www.xorbin.com/tools/sha256-hash-calculator
+
+RSA key generator:
+http://travistidwell.com/jsencrypt/demo/
+
+POST response creation:
+https://fidoalliance.org/specs/fido-uaf-v1.0-ps-20141208/fido-uaf-protocol-v1.0-ps-20141208.html
+
+openssl binaries:
+https://code.google.com/archive/p/openssl-for-windows/downloads
+https://www.youtube.com/watch?v=JLPzEbNDHwQ
+
+openSSL commands:
+https://www.sslshopper.com/article-most-common-openssl-commands.html
+https://www.sslshopper.com/csr-decoder.html
+https://www.sslshopper.com/certificate-decoder.html
+https://www.sslshopper.com/certificate-key-matcher.html
+
+decode base64 for encoded ios data:
+http://stackoverflow.com/questions/19595800/decode-a-string-file-in-java-encoded-in-ios-base64
+
+foreign key concept in mysql:
+http://www.w3schools.com/sql/sql_foreignkey.asp

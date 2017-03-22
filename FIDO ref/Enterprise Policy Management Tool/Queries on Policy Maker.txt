@@ -1,0 +1,7 @@
+Queries:
+
+1) When we will be using this enterprise policy management tool? before user installs the FIDO app and registers an account of RP with his device?
+
+2) If yes to above question, how are we planning to link the user's device details to the data stored for Enterprise Policy Management website (i.e. the grade of user, the authenticators user have chosen, etc)?
+
+

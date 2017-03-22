@@ -1,0 +1,34 @@
+A] com.google.gson.Gson PACKAGE:
+Gson is a Java library that can be used to convert Java Objects into their JSON representation. It can also be used to convert a JSON string to an equivalent Java object. Gson can work with arbitrary Java objects including pre-existing objects that you do not have source-code of. 
+There are a few open-source projects that can convert Java objects to JSON. However, most of them require that you place Java annotations in your classes; something that you can not do if you do not have access to the source-code. Most also do not fully support the use of Java Generics. Gson considers both of these as very important design goals. 
+
+Gson Goals
+•Provide simple  toJson()  and  fromJson()  methods to convert Java objects to JSON and vice-versa
+•Allow pre-existing unmodifiable objects to be converted to and from JSON
+•Extensive support of Java Generics
+•Allow custom representations for objects
+•Support arbitrarily complex objects (with deep inheritance hierarchies and extensive use of generic types)
+
+
+B] com.google.gson.GsonBuilder class:
+public final class GsonBuilderextends Object
+Use this builder to construct a Gson instance when you need to set configuration options other than the default. For Gson with default configuration, it is simpler to use new Gson(). GsonBuilder is best used by creating it, and then invoking its various configuration methods, and finally calling create.
+
+The following is an example shows how to use the GsonBuilder to construct a Gson instance: 
+ Gson gson = new GsonBuilder()
+     .registerTypeAdapter(Id.class, new IdTypeAdapter())
+     .enableComplexMapKeySerialization()
+     .serializeNulls()
+     .setDateFormat(DateFormat.LONG)
+     .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+     .setPrettyPrinting()
+     .setVersion(1.0)
+     .create();
+ 
+NOTES: 
+• the order of invocation of configuration methods does not matter.
+• The default serialization of Date and its subclasses in Gson does not contain time-zone information. So, if you are using date/time instances, use GsonBuilder and its setDateFormat methods.
+
+
+
+https://www.youtube.com/watch?v=l26rtc1wKYo

@@ -1,0 +1,60 @@
+1. GET call : /fidouaf/v1/public/regRequest/username
+
+reponse: [{"header":{"upv":{"major":1,"minor":0},"op":"Reg","appID":"https://www.head2toes.org/fidouaf/v1/public/uaf/facets","serverData":"Yzc5ZmY1N2JkNmQxOTI2ZDg2NmVhNTdiMTYxZGZhYTlmY2ZiOGIxOTAyNDBiYmI5YzQ4ZmY3NDczYzM1ZjU4OS5NVFExTmpNNE1qUTNPREUwTlEuWVRNLlNrUkthRXBFUlhkS1F6VnJWbXhhWVZReFZubGlSRXBIVW0weFJFOVdjRWRPVm5CYVdqTlY"},"challenge":"JDJhJDEwJC5kVlZaT1VybDJGRm1DOVpGNVpZZ3U","username":"a3","policy":{"accepted":[[{"aaid":["EBA0#0001"]}],[{"aaid":["0015#0001"]}],[{"aaid":["0012#0002"]}],[{"aaid":["0010#0001"]}],[{"aaid":["4e4e#0001"]}],[{"aaid":["5143#0001"]}],[{"aaid":["0011#0701"]}],[{"aaid":["0013#0001"]}],[{"aaid":["0014#0000"]}],[{"aaid":["0014#0001"]}],[{"aaid":["53EC#C002"]}]]}}]
+
+2. POST call: /fidouaf/v1/public/regResponse
+
+request details: 
+headers : Content-Type:Application/json Accept:Application/json
+data(decoded): [{"assertions":[{"assertion":"AT4nAwM-2gALLgkARUJBMCMwMDAxDi4HAAAAAQEAAAEKLiAAxPHHISLRuxltQQIQVhnlasth20br
+bX51Cd7Ua7qGhZoJLkkAWldKaGVTMTBaWE4wTFd0bGVTMUtSRXBvU2tSRmQwcElZM2RXYlhCNllt
+eFJNVXd3TlVoV01GSXlaVWRPZDJWR1pFOU9lVFE5Cg0uCAAAAAEAAAABAAwuQQAEK03bS7oXXYQn
+gvq6px_nihxwxyeK0_fIARgQbZalFxAJfvDHGSFkoorJ3zRvyY8Ucf3zGit3bX0wgltGf8OGNgc-
+RQIGLkAAmqa8nRjwk_xXPDrl1qZC4SCDAPZjjPGl1SPR-TMr2xZy1aS9n0VcveCHIkYX4KGNYIL0
+Wca6z_uc0T_zt1R-OgUu_QEwggH5MIIBn6ADAgECAgRVMUzTMAkGByqGSM49BAEwgYQxCzAJBgNV
+BAYTAlVTMQswCQYDVQQIDAJDQTERMA8GA1UEBwwIU2FuIEpvc2UxEzARBgNVBAoMCmVCYXksIElu
+Yy4xDDAKBgNVBAsMA1ROUzESMBAGA1UEAwwJZUJheSwgSW5jMR4wHAYJKoZIhvcNAQkBFg9ucGVz
+aWNAZWJheS5jb20wHhcNMTUwNDE3MTgxMTMxWhcNMTUwNDI3MTgxMTMxWjCBhDELMAkGA1UEBhMC
+VVMxCzAJBgNVBAgMAkNBMREwDwYDVQQHDAhTYW4gSm9zZTETMBEGA1UECgwKZUJheSwgSW5jLjEM
+MAoGA1UECwwDVE5TMRIwEAYDVQQDDAllQmF5LCBJbmMxHjAcBgkqhkiG9w0BCQEWD25wZXNpY0Bl
+YmF5LmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDyHDmUdNRe9ndLNj1quBs44EPamfnMA
+ziZtKHBDIIvltGyRMvcdU9Y9DGphUz7ekm0kgtio5awgx3lFv-HwP4QwCQYHKoZIzj0EAQNJADBG
+AiEAimSin8vd862bv1DaUqsrF5r4py8DWDqqTNqPjZUPaGACIQCu0-lMQAMhbPbKuXlcZ8lVx9wW
+a-kwC4wq-4TUnveOng==
+","assertionScheme":"UAFV1TLV"}],"fcParams":"eyJhcHBJRCI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOmVUS1NGT2hHQjAyUlBFYlM0WjludWdGb3R6
+cyIsImNoYWxsZW5nZSI6IkpESmhKREV3SkM1a1ZsWmFUMVZ5YkRKR1JtMURPVnBHTlZwWlozVSIs
+ImZhY2V0SUQiOiIifQ==
+","header":{"appID":"android:apk-key-hash:eTKSFOhGB02RPEbS4Z9nugFotzs","op":"Reg","serverData":"Yzc5ZmY1N2JkNmQxOTI2ZDg2NmVhNTdiMTYxZGZhYTlmY2ZiOGIxOTAyNDBiYmI5YzQ4ZmY3NDczYzM1ZjU4OS5NVFExTmpNNE1qUTNPREUwTlEuWVRNLlNrUkthRXBFUlhkS1F6VnJWbXhhWVZReFZubGlSRXBIVW0weFJFOVdjRWRPVm5CYVdqTlY","upv":{"major":1,"minor":0}}}]
+
+server response : 
+[{"authenticator":{"AAID":"EBA0#0001","KeyID":"WldKaGVTMTBaWE4wTFd0bGVTMUtSRXBvU2tSRmQwcEhVbFJsUmxGNVVsUm5lbVJGUmtoVFV6VlZUVEZrYTJWSFVtdFZibFU5Cg","deviceId":null,"username":null,"status":null},"PublicKey":"BHFLQshqOYisXZpR9VYgp8DINjy3nLcrvKkDh3vl-YMuflSgueWi1YjLDBZoZ3yVIdJ692AbqFk7UHcP936b1Jo","SignCounter":null,"AuthenticatorVersion":"0.0","tcDisplayPNGCharacteristics":null,"username":"a1","userId":null,"deviceId":null,"timeStamp":"1456383445591","status":"SUCCESS"}]
+
+
+3. Authentication Call: http://openidconnect.ebay.com/fidouaf/v1/public/authRequest
+
+request : GET
+response: 
+{"uafProtocolMessage":"[{\"header\":{\"upv\":{\"major\":1,\"minor\":0},\"op\":\"Auth\",\"appID\":\"android:apk-key-hash:bE0f1WtRJrZv\\\/C0y9CM73bAUqiI\",\"serverData\":\"OWI5N2QzMmIxYTQ3ZTY1NDE1ZjcwMzczZjk0YjcxYjQzMmJiNWQzYTBiYjI5YmRjZGZhZWIwNjI0N2Y3YjQxYS5NVFExTmpNNU16RTBOamN5T1EuU2tSS2FFcEVSWGRLUms0eVVsUnJOVkl3Y0c5TWJrNUlZMjFKZVUxVlJrOWpWRTVQWkVVNA\"},\"challenge\":\"JDJhJDEwJFN2RTk5R0poLnNHcmIyMUFOcTNOdE8\",\"policy\":{\"accepted\":[[{\"aaid\":[\"EBA0#0001\"]}],[{\"aaid\":[\"0015#0001\"]}],[{\"aaid\":[\"0012#0002\"]}],[{\"aaid\":[\"0010#0001\"]}],[{\"aaid\":[\"4e4e#0001\"]}],[{\"aaid\":[\"5143#0001\"]}],[{\"aaid\":[\"0011#0701\"]}],[{\"aaid\":[\"0013#0001\"]}],[{\"aaid\":[\"0014#0000\"]}],[{\"aaid\":[\"0014#0001\"]}],[{\"aaid\":[\"53EC#C002\"]}]]}}]"}
+
+Post from android: 
+{"uafProtocolMessage":"[{\"assertions\":[{\"assertion\":\"Aj4fAQQ+1wALLgkARUJBMCMwMDAxDi4FAAAAAQEADy5AAGZiYzNjNmM5MzQ2MDNhNjZkOWEyZmEz\nZmY3YmE0NDdkY2ZiNmJlODhlNjliNThmMDU2Y2M0YjNhOTU0YjgxMjMKLiAAXE5g8LDfamM7zGE9\nESLQH1KJrWvxk5NNLzD+qc72/XUQLgAACS5JAFpXSmhlUzEwWlhOMExXdGxlUzFLUkVwb1NrUkZk\nMHBHVmpOUlZHeGhaRlZHV21SSWNIZFNSMDB3VVd4Uk5WSnJXWFpqVjFVOQoNLgQAAAABAAYuQADd\ncjo0+pkEtkghzQu7kFbA21ajcpRH6cfBvMxuW20AtCdQkzs6aFa8IpPXMZGN1j+9q+6N22O0o3Ah\n2azEo1Xl\n\",\"assertionScheme\":\"UAFV1TLV\"}],\"fcParams\":\"eyJhcHBJRCI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOmJFMGYxV3RSSnJadi9DMHk5Q003M2JBVXFp\nSSIsImNoYWxsZW5nZSI6IkpESmhKREV3SkZOMlJUazVSMHBvTG5OSGNtSXlNVUZPY1ROT2RFOCIs\nImZhY2V0SUQiOiIifQ==\n\",\"header\":{\"appID\":\"android:apk-key-hash:bE0f1WtRJrZv/C0y9CM73bAUqiI\",\"op\":\"Auth\",\"serverData\":\"OWI5N2QzMmIxYTQ3ZTY1NDE1ZjcwMzczZjk0YjcxYjQzMmJiNWQzYTBiYjI5YmRjZGZhZWIwNjI0N2Y3YjQxYS5NVFExTmpNNU16RTBOamN5T1EuU2tSS2FFcEVSWGRLUms0eVVsUnJOVkl3Y0c5TWJrNUlZMjFKZVUxVlJrOWpWRTVQWkVVNA\",\"upv\":{\"major\":1,\"minor\":0}}}]"}
+
+Response From server:
+#uafMessageOut
+[{"assertions":[{"assertion":"Aj4fAQQ+1wALLgkARUJBMCMwMDAxDi4FAAAAAQEADy5AAGZiYzNjNmM5MzQ2MDNhNjZkOWEyZmEz
+ZmY3YmE0NDdkY2ZiNmJlODhlNjliNThmMDU2Y2M0YjNhOTU0YjgxMjMKLiAAXE5g8LDfamM7zGE9
+ESLQH1KJrWvxk5NNLzD+qc72/XUQLgAACS5JAFpXSmhlUzEwWlhOMExXdGxlUzFLUkVwb1NrUkZk
+MHBHVmpOUlZHeGhaRlZHV21SSWNIZFNSMDB3VVd4Uk5WSnJXWFpqVjFVOQoNLgQAAAABAAYuQADd
+cjo0+pkEtkghzQu7kFbA21ajcpRH6cfBvMxuW20AtCdQkzs6aFa8IpPXMZGN1j+9q+6N22O0o3Ah
+2azEo1Xl
+","assertionScheme":"UAFV1TLV"}],"fcParams":"eyJhcHBJRCI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOmJFMGYxV3RSSnJadi9DMHk5Q003M2JBVXFp
+SSIsImNoYWxsZW5nZSI6IkpESmhKREV3SkZOMlJUazVSMHBvTG5OSGNtSXlNVUZPY1ROT2RFOCIs
+ImZhY2V0SUQiOiIifQ==
+","header":{"appID":"android:apk-key-hash:bE0f1WtRJrZv/C0y9CM73bAUqiI","op":"Auth","serverData":"OWI5N2QzMmIxYTQ3ZTY1NDE1ZjcwMzczZjk0YjcxYjQzMmJiNWQzYTBiYjI5YmRjZGZhZWIwNjI0N2Y3YjQxYS5NVFExTmpNNU16RTBOamN5T1EuU2tSS2FFcEVSWGRLUms0eVVsUnJOVkl3Y0c5TWJrNUlZMjFKZVUxVlJrOWpWRTVQWkVVNA","upv":{"major":1,"minor":0}}}]
+
+
+#ServerResponse
+[{"AAID":"EBA0#0001","KeyID":"WldKaGVTMTBaWE4wTFd0bGVTMUtSRXBvU2tSRmQwcEdWak5SVkd4aFpGVkdXbVJJY0hkU1IwMHdVV3hSTlZKcldYWmpWMVU5Cg","deviceId":null,"username":"a2","status":"SUCCESS"}]
+
+
+

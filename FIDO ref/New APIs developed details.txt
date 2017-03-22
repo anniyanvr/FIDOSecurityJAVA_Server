@@ -1,0 +1,93 @@
+A] Login Request:
+============================================================================================================================
+API: http://localhost:8080/fidouaf_test/v1/public/loginRequest
+Method: POST
+
+Input:
+{
+	"username": "<sent phone number in E.164 format. Ex. +919134678956>"
+}
+
+Output:
+{
+	"OTP":
+}
+
+
+
+B]Login Response:
+===============================================================================================================================
+API: http://localhost:8080/fidouaf_test/v1/public/loginResponse
+Method POST:
+
+Input:
+{
+	"username": "<sent phone number in E.164 format. Ex. +919134678956>",
+	"otp": "previously generate otp sent to user"
+}
+
+Output:
+{
+	"Login Status": true/false,
+	"Registration status": true/false
+}
+
+
+
+C]New Vendor Request:
+===============================================================================================================================
+API: http://localhost:8080/fidouaf_test/v1/public/newVendorRequest
+Method POST:
+
+Input:
+{
+	"vendorName": "",
+	"username": "",
+	"phoneNumber": "",
+	"dateTime": ""
+}
+
+Output:
+{
+	"registrationResponse": "<OTP Generated>"
+}
+
+
+
+D]New Vendor Response:
+===============================================================================================================================
+API: http://localhost:8080/fidouaf_test/v1/public/newVendorResponse
+Method POST:
+
+Input:
+{
+	"vendorName": "",
+	"username": "",
+	"otp": ""
+}
+
+Output:
+{
+	"Vendor Name": "",
+	"Registration Status": true/false
+}
+
+
+
+E]FIDO Server Request:
+===============================================================================================================================
+API: http://localhost:8080/fidouaf_test/v1/public/fidoServerRequest
+Method POST:
+
+Input:
+{
+	"vendorName": "",
+	"phoneNumber": ""
+}
+
+
+Output:
+{
+	"Vendor Name": "",
+	"Registration Status": true/false
+}

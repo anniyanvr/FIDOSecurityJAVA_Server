@@ -1,0 +1,12 @@
+Hi Pandurang
+I was currently testing each individual APIs for interapp and website FIDO reg, auth and trans scenario, I wanted to suggest something regarding this area of testing
+
+In my first project in psl, we had similar kind of scenarios/test cases each divided into steps. All this steps were automated using a tool called jmeter and they were grouped as test cases and saved as a jmeter script. So whenever we changed any code or if we wanted to test code coverage, we used to load this test scripts in jmeter and run them, and they used to run sequentially, making it easier to see that the scenario works without any issue. 
+
+In our FIDO project too we have similar test cases, for example , we perform some steps for FIDO reg, then we do FIDO auth and then FIDO transaction. Each of this scenarios have some steps which needs to be followed sequentially. Like for example, for a particular API to work, it needs certain data to be present in few tables in Database, prior to running this API. Currently, i have to manually run SQL queries to see that data is present and is accurate in the tables each API refers to and it is time consuming. If we could have all these scenarios automated and kept somewhere centralized, then anybody could run them whenever they want and test them out. Regarding the IOS APP, we will need to make sure that the IOS APP is running and is stable on apple phone and that phone is available here in office.
+
+I'm not sure if this is feasible, as ive no idea if applications involving devices like mobiles, tabs, etc can be automated. Can u please let me know your thoughts on this?
+
+eeeyythgh:APA91bEMccBst20vlf0Rjw6NFkmlay1kz7unITDCakIMZxTQoWtZ0_7_YqsN-RA5HQNoU8NzVv5jrcbKTTOU945FbydYIstXwoyHZXsm_Jw7X3jrbaGQ-6oz9_CgmkATGMKrRybGJKmM
+
+http://localhost:8080/fidouaf_test/v1/public/authRequest/customPolicy?deviceid=eeeyythgh&accountid=11123

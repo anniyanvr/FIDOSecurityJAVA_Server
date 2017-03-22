@@ -1,0 +1,10 @@
+Apple Developer Account: 
+username: amoght_tarcar@persistent.com
+password:iosFido2016
+
+
+Password for .p12 file APNS : iosFido2016
+
+Device Tokens for Push Notifications
+iphone 5 : b4cf1d8081f97300fc07c26feb180e0fcfb9f24ed3263c44156c8132f36a5ba7
+iphone 6: 1651fdc19bf8823fa28aa349e31d35a1aba1649d0bbc6f1d9ad768023de3aa96

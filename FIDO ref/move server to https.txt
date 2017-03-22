@@ -1,0 +1,7 @@
+var server = https.createServer({
+    key: fs.readFileSync('C:/openssl-0.9.8k_X64/bin/key.pem'),
+    cert: fs.readFileSync('C:/openssl-0.9.8k_X64/bin/cert.pem'),
+    passphrase: 'root'
+  }, app).listen(app.get('port'), function() {
+		console.log('Server listening at https://' + server.address().address + ':' + server.address().port);//'Express server listening on port ' + app.get('port'));
+  });

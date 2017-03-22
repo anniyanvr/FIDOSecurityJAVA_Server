@@ -1,0 +1,44 @@
+Public Ports opened details:  VM: 10.51.237.214
+
+Old Relying Party:
+URL: http://10.51.237.214:3000/
+Domain name to be given: fido.persistent.co.in  
+
+
+FIDO server:
+URL: http://10.51.237.214:8080/
+Domain name to be given: fidoserver.persistent.co.in 
+
+
+New Relying Party:
+http://10.51.237.214:9090/RelyingParty/service/public/hi/jas      -------------- BACKEND API
+
+http://10.51.237.214:9090/RelyingParty/Index.html        -------------- FRONTEND URL
+
+So,
+URL: http://10.51.237.214:9090/RelyingParty/
+Domain name to be given: fidopslbank2.persistent.co.in
+
+
+
+
+Reference REMEDY IDs:
+1) REQ000000690021
+Summary : 	Allow access to VM machine outside PSL network
+Detailed Description : 	Hi, I want my VM to be allowed to access outside PSL network by making it public. The reason behind this is, we have a client demo scheduled on 20th June, Monday and the client is currently in USA and will need to access this VM from there. The domain to give for the VM for public access is: "fido.persistent.co.in" VM Machine Details: VM Name: hj-ctocto4647 IP Address: 10.51.237.214 Please do this ASAP. Thanks
+Project Name : 	Security_R&D
+Categorization Tier 1 : 	New/additional requirement/Provisioning
+Categorization Tier 2 : 	Other IT Services
+Categorization Tier 3 : 	Project specific access
+Urgency : 	1-Critical
+
+2) REQ000000736182
+Summary : 	Provide a public accessible URL for a website on VM machine
+Detailed Description : 	Hi, I have recently created a new website and it is running currently on a public VM. I want the main URL of this website to be made public so that it can be accesses from anywhere in the world. Below are the details of the website URL and the domain name to be given for the same: URL: http://10.51.237.214:9090/RelyingParty/ Port: 9090 Domain name to be given: fidonewrp.persistent.co.in This website will be accessed from desktop, tablets, mobile phones and ipads, basically from everywhere. Please see that the https layel (persistent ssl certificate) is added to this website while opening a port and assigning the above domain name given to this website url, so that at the end we are able to access the website from anywhere by using this url: "https://fidonewrp.persistent.co.in" Thanks
+Project Name : 	Security_R&D
+Categorization Tier 1 : 	New/additional requirement/Provisioning
+Categorization Tier 2 : 	Other IT Services
+Categorization Tier 3 : 	Project specific access
+Urgency : 	1-Critical
+
+

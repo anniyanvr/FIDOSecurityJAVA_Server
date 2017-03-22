@@ -1,0 +1,3 @@
+1) use https://fido.persistent.co.in  for website URL: http://10.51.237.214:3000 
+2) use https://fidoserver.persistent.co.in/fidouaf_test/v1/stats  for server URL: http://10.51.237.214:8080/fidouaf_test/v1/stats
+3) user https://fidopslbank2.persistent.co.in for new RP website URL: http://10.51.237.214:9090/
